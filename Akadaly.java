@@ -12,4 +12,5 @@ public abstract class Akadaly {
 
 	public abstract void oregit();
 
+	// comment git change
 }
