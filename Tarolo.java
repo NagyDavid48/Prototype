@@ -15,7 +15,9 @@ public class Tarolo {
 	}
 
 	public Mezo[][] getMezok() {
+		//Mezo
 		return this.mezok;
+		
 	}
 
 	/**
