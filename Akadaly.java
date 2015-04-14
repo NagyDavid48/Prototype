@@ -3,10 +3,11 @@ package Class_Diagram;
 public abstract class Akadaly {
 
 	/**
-	 * 
-	 * @param r
+	 * Ezt a robotot kapja meg és erre hat az akadály.
+	 * Minden tipusú akadályban felül kell definiálni.
+	 * @param r - Robot
 	 */
-	public abstract void viselked�s(Robot r);
+	public abstract void viselkedés(Robot r);
 
 	public abstract void eletcsokkent();
 
