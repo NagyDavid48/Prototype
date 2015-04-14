@@ -6,10 +6,10 @@ public class Tarolo {
 
 	/**
 	 * 
-	 * @param parameter
-	 * @param parameter2
+	 * @param szelesseg
+	 * @param magassag
 	 */
-	public void operation(int parameter, int parameter2) {
+	public Tarolo(int szelesseg, int magassag) {
 		// TODO - implement Tarolo.operation
 		throw new UnsupportedOperationException();
 	}
