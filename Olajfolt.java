@@ -34,7 +34,7 @@ public class Olajfolt extends Akadaly {
 	 * Ha egy kisrobot ugrik az olajra, akkor ezt takaritjak es
 	 * koronkent csokken az elete.
 	 * Ha leugrik onnan, vagy elpusztul, akkor mar nem takaritjak ezt a foltot.
-	 * @param takaritjak - Beallítja azt, hogy takaritjak-e.
+	 * @param takaritjak - Beallitja azt, hogy takaritjak-e.
 	 */
 	public void setTakaritjak(boolean takaritjak) {
 		this.takaritjak = takaritjak;

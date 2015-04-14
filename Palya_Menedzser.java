@@ -13,8 +13,9 @@ public class Palya_Menedzser {
 	 * @param olaj
 	 */
 	public Palya_Menedzser(int kor, int ragacs, int olaj) {
-		// TODO - implement Palya_Menedzser.Palya_Menedzser
-		throw new UnsupportedOperationException();
+		this.kor = kor;
+		this.ragacskeszlet = ragacs;
+		this.olajkeszlet = olaj;
 	}
 
 	public void korSzamol() {

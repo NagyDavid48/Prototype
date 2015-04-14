@@ -1,7 +1,7 @@
 package Prototype;
 
 public abstract class Akadaly {
-
+	
 	/**
 	 * Ezt a robotot kapja meg es erre hat az akadaly.
 	 * Minden tipusu akadalyban felul kell definialni.
