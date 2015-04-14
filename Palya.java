@@ -1,5 +1,7 @@
 package Prototype;
 
+import java.util.ArrayList;
+
 public class Palya {
 
 	private int soronlevo;

@@ -4,7 +4,7 @@ public class Mezo {
 
 	private boolean checkpoint;
 	private boolean palyaszakasz;
-	private Akadály akadaly;
+	private Akadaly akadaly;
 	private Robot robot;
 	private Vektor poziciovektor;
 
