@@ -5,18 +5,19 @@ public class Ragacs extends Akadaly {
 	private int elet;
 	private boolean takaritjak;
 
+	//Fuck the police! (and contructors!)
+	{this.elet = 4; this.takaritjak = false;}
+	
 	/**
 	 * 
 	 * @param r
 	 */
-	public void viselkedés(Robot r) {
-		// TODO - implement Ragacs.viselkedés
-		throw new UnsupportedOperationException();
+	public void viselkedes(Robot r) {
+		
 	}
 
 	public void eletcsokkent() {
-		// TODO - implement Ragacs.eletcsokkent
-		throw new UnsupportedOperationException();
+		this.elet--;
 	}
 
 	public int getElet() {
@@ -33,6 +34,12 @@ public class Ragacs extends Akadaly {
 	 */
 	public void setTakaritjak(boolean takaritjak) {
 		this.takaritjak = takaritjak;
+	}
+
+	@Override
+	public void oregit() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
