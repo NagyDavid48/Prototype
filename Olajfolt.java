@@ -4,19 +4,22 @@ public class Olajfolt extends Akadaly {
 
 	private int elet;
 	private boolean takaritjak;
-
+	
+	//Fuck the police! (and contructors!)
+	{this.elet = 4; this.takaritjak = false;}
+	
+	
 	/**
-	 * 
-	 * @param r
+	 * Az olajfolt nem teszi lehetove, hogy a robot a kovetkezo korben sebesseget valtson.
+	 * @param r - Erre a robotra hat.
 	 */
-	public void viselkedés(Robot r) {
-		// TODO - implement Olajfolt.viselkedés
-		throw new UnsupportedOperationException();
+	public void viselkedes(Robot r) {
+		r.setOlajonvan(true);
 	}
 
 	public void eletcsokkent() {
-		// TODO - implement Olajfolt.eletcsokkent
-		throw new UnsupportedOperationException();
+		this.elet--;
+		//this.elet = this.getElet() - 1;//Ha mar van hasznaljuk is! :D
 	}
 
 	public int getElet() {
@@ -28,13 +31,18 @@ public class Olajfolt extends Akadaly {
 	}
 
 	/**
-	 * 
-	 * @param takaritjak
+	 * Ha egy kisrobot ugrik az olajra, akkor ezt takaritjak es
+	 * koronkent csokken az elete.
+	 * Ha leugrik onnan, vagy elpusztul, akkor mar nem takaritjak ezt a foltot.
+	 * @param takaritjak - BeallÃ­tja azt, hogy takaritjak-e.
 	 */
 	public void setTakaritjak(boolean takaritjak) {
 		this.takaritjak = takaritjak;
 	}
-
+	
+	/**
+	 * Ez minek?
+	 */
 	public void oregit() {
 		// TODO - implement Olajfolt.oregit
 		throw new UnsupportedOperationException();
