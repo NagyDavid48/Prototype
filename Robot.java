@@ -1,4 +1,4 @@
-package Class_Diagram;
+package Prototype;
 
 public class Robot extends Robotok {
 
