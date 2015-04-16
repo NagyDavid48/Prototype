@@ -1,27 +1,22 @@
 package Prototype;
 
 public class Olajfolt extends Akadaly {
-
-	private int elet;
-	private boolean takaritjak;
 	
-	//Fuck the police! (and contructors!)
-	{this.elet = 4; this.takaritjak = false;}
-	
+	private int elet = 4;
+	private boolean takaritjak = false;
 	
 	/**
 	 * Az olajfolt nem teszi lehetove, hogy a robot a kovetkezo korben sebesseget valtson.
 	 * @param r - Erre a robotra hat.
 	 */
 	public void viselkedes(Robot r) {
-		r.setOlajonvan(true);
+		r.setOlajonvan(true);//Innen a robot vegzi a sebesseg varialast.
 	}
 
-	public void eletcsokkent() {
-		this.elet--;
-		//this.elet = this.getElet() - 1;//Ha mar van hasznaljuk is! :D
-	}
-
+	/**
+	 * Vissza adja az olaj eletet.
+	 * @return - Az olajfolt elete.
+	 */
 	public int getElet() {
 		return this.elet;
 	}
@@ -39,13 +34,24 @@ public class Olajfolt extends Akadaly {
 	public void setTakaritjak(boolean takaritjak) {
 		this.takaritjak = takaritjak;
 	}
-	
+
 	/**
-	 * Ez minek?
+	 * Meghivja az elet csokkent fv-t.
 	 */
+	@Override
 	public void oregit() {
-		// TODO - implement Olajfolt.oregit
-		throw new UnsupportedOperationException();
+		this.eletcsokkent();
+		
+	}
+
+	/**
+	 * Ez csokkenti az akadaly eleteteggyel.
+	 * Az oregit fv hivja meg.
+	 */
+	@Override
+	public void eletcsokkent() {
+		if(this.elet>0)//Tudom, hogy mashol is ellenorizzuk, hogy elerte-e a nullat, de nem bizom a veletlenre, es ez nem art semmit.
+			this.elet--;
 	}
 
 }
