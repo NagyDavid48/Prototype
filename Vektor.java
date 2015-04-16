@@ -68,6 +68,14 @@ public class Vektor {
 		this.x /= skalar;
 		this.y /= skalar;
 	}
+	
+	/**
+	 * A vektor es egy masik atlagat szamitja ki.
+	 * @param v - Masik vektor.
+	 */
+	public void atlagol(Vektor v){
+		this.setVektor(new Vektor((x+v.getX())/2,(y+v.getY())/2));
+	}
 
 	public int getY() {
 		return y;
