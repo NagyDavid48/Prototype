@@ -107,7 +107,7 @@ public class Palya {
 			int oszlop = rand.nextInt(szelesseg);
 			koordinata[0]=sor;
 			koordinata[1]=oszlop;
-			if(m[sor][oszlop].getPalyaszakasz() == true && m[sor][oszlop].getCheckpoint() == false)
+			if(m[sor][oszlop].getPalyaszakasz() == true && m[sor][oszlop].getCheckpoint() == false && m[sor][oszlop].getRobot() == null)
 			{
 				m[sor][oszlop].setCheckpoint(true);
 				i++;
