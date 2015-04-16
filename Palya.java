@@ -8,7 +8,8 @@ public class Palya {
 	private int soronlevo;
 	private ArrayList<Robot> robotok;
 	private ArrayList<KisRobot> kisrobotok;
-	private Tarolo t;
+	
+	private Tarolo t; //Asszociációs kapcsolatból
 	
 	//egyszerûbb randomgeneráláshoz tagváltozók
 	private int szelesseg;	
@@ -27,8 +28,10 @@ public class Palya {
 		this.szelesseg = szelesseg;
 		soronlevo = 0;
 		
+		//hogyan állítsuk be a mezõk specialításait akadály, robot, cp, szakadek 
 		t = new Tarolo(szelesseg, magassag);
 		
+		//robot melyik mezõre kerüljön, mi alapján válasszunk random normál üres mezõ?
 		for(int i = 0; i<robotszam; i++)
 			robotok.add(new Robot(olaj,ragacs));
 	}
@@ -37,6 +40,7 @@ public class Palya {
 	 * 
 	 * @param v
 	 */
+	//elvileg kész
 	public void vektorFeldolgoz(Vektor v) {
 		robotLeptet(robotok.get(soronlevo),v);
 		if(soronlevo++ == robotok.size()){
@@ -53,6 +57,7 @@ public class Palya {
 	 * @param r
 	 * @param v
 	 */
+	//elvileg kész
 	public void robotLeptet(Robot r, Vektor v) {
 		if(!r.getKiesett())
 			r.lep(v);
@@ -114,6 +119,7 @@ public class Palya {
 	 * 
 	 * @param r
 	 */
+	//kész
 	public void olajLerak(Robot r) {
 		r.olajLerak();
 	}
@@ -122,6 +128,7 @@ public class Palya {
 	 * 
 	 * @param r
 	 */
+	//kész
 	public void ragacsLerak(Robot r) {
 		r.ragacsLerak();
 	}
@@ -137,6 +144,7 @@ public class Palya {
 		// ide gondolom jönne még egy kiirás lehet kellene visszatérési érték a protohoz
 	}
 
+	//elvileg kész
 	public void oregit() {
 		Mezo[][] m = t.getMezok();
 		for(int i = 0; i<magassag; i++)
