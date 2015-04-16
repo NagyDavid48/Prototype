@@ -9,10 +9,13 @@ public abstract class Akadaly {
 	 */
 	public abstract void viselkedes(Robot r);
 
+	/**
+	 * Az elet attr.-ot csokkenti.
+	 */
 	public abstract void eletcsokkent();
 
 	/**
-	 * Ezt a függvényt lehet hívni kívülről.
+	 * Ezt a fvt hivja a PM.
 	 */
 	public abstract void oregit();
 }
