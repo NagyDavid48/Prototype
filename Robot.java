@@ -22,16 +22,40 @@ public class Robot extends Robotok {
 		this.kiesett = false;
 		this.checkpoint = 0;
 		this.sebessegvektor = new Vektor();//(0;0)
-		//this.mezo = null;
+		//this.mezo = null;					//mezõ kérdése itt is
 	}
 
 	/**
 	 * 
 	 * @param v
 	 */
-	public int[] lep(Vektor v) {
-		// TODO - implement Robot.lep
-		throw new UnsupportedOperationException();
+	// if szerkezetet még át kell gondolni
+	public int[] lep(Vektor v) {				//lehet már nincs is szükség erre a visszatérési értékre
+		sebessegvektor.addVektor(v);
+		Vektor poz = mezo.getPoziciovektor();
+		Mezo mezo_c = t.getMezo(vektorAtvalt(poz));
+		if(mezo_c.getPalyaszakasz() == false){
+			this.kiesett = true;
+		}else if(mezo_c.getRobot() != null){
+			Robot r = mezo_c.getRobot();
+			r.utkozes(this);
+			//ide kell még az ütközés kezelése 
+		}else if(mezo_c.getAkadaly() != null){
+			Akadaly a = mezo_c.getAkadaly();
+			//akadaly életének lekérdezése kellene az Akadályba
+			int elet = 2; //a.getElet();
+			if(elet == 0){
+				mezo_c.setAkadaly(null);
+			}else{
+				a.viselkedes(this);
+			}
+		}else if(mezo_c.getCheckpoint() == true){
+			this.addCheckpoint();
+			mezo_c.setCheckpoint(false);
+		}
+		this.mezo = mezo_c;
+		
+		return null;
 	}
 
 	/**
@@ -39,18 +63,24 @@ public class Robot extends Robotok {
 	 * @param v
 	 */
 	public int[] vektorAtvalt(Vektor v) {
-		// TODO - implement Robot.vektorAtvalt
-		throw new UnsupportedOperationException();
+		Vektor pozicio = sebessegvektor.addVektor2(v);
+		pozicio.skalarOszt(10);
+		int[] tmp = new int[2];
+		tmp[0] = pozicio.getX();
+		tmp[1] = pozicio.getY();
+		return tmp;
 	}
-
+	
+	//Elvileg kész
 	public void olajLerak() {
-		// TODO - implement Robot.olajLerak
-		throw new UnsupportedOperationException();
+		Olajfolt akadaly = new Olajfolt();
+		mezo.setAkadaly(akadaly);
 	}
 
+	//Elvileg Kész
 	public void ragacsLerak() {
-		// TODO - implement Robot.ragacsLerak
-		throw new UnsupportedOperationException();
+		Ragacs akadaly = new Ragacs();
+		mezo.setAkadaly(akadaly);
 	}
 
 	/**

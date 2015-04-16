@@ -1,7 +1,8 @@
 package Prototype;
 
 public abstract class Robotok {
-
+	protected Tarolo t; //Asszociáció miatt
+	
 	/**
 	 * 
 	 * @param v
