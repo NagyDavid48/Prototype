@@ -1,12 +1,18 @@
 package Prototype;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Palya {
 
 	private int soronlevo;
 	private ArrayList<Robot> robotok;
 	private ArrayList<KisRobot> kisrobotok;
+	private Tarolo t;
+	
+	//egyszerûbb randomgeneráláshoz tagváltozók
+	private int szelesseg;	
+	private int magassag;
 
 	/**
 	 * 
@@ -17,8 +23,14 @@ public class Palya {
 	 * @param ragacs
 	 */
 	public Palya(int szelesseg, int magassag, int robotszam, int olaj, int ragacs) {
-		// TODO - implement Palya.Palya
-		throw new UnsupportedOperationException();
+		this.magassag = magassag;
+		this.szelesseg = szelesseg;
+		soronlevo = 0;
+		
+		t = new Tarolo(szelesseg, magassag);
+		
+		for(int i = 0; i<robotszam; i++)
+			robotok.add(new Robot(olaj,ragacs));
 	}
 
 	/**
@@ -26,8 +38,14 @@ public class Palya {
 	 * @param v
 	 */
 	public void vektorFeldolgoz(Vektor v) {
-		// TODO - implement Palya.vektorFeldolgoz
-		throw new UnsupportedOperationException();
+		robotLeptet(robotok.get(soronlevo),v);
+		if(soronlevo++ == robotok.size()){
+			int i = 0;
+			while(i<kisrobotok.size())
+			{
+				kisrobotLeptet(kisrobotok.get(i),v);
+			}
+		}	
 	}
 
 	/**
@@ -36,13 +54,31 @@ public class Palya {
 	 * @param v
 	 */
 	public void robotLeptet(Robot r, Vektor v) {
-		// TODO - implement Palya.robotLeptet
-		throw new UnsupportedOperationException();
+		if(!r.getKiesett())
+			r.lep(v);
+		soronlevo++;
 	}
 
 	public void kisrobotLetrehoz() {
-		// TODO - implement Palya.kisrobotLetrehoz
-		throw new UnsupportedOperationException();
+		Random rand = new Random();
+		int [] koordinata = new int[2];
+		Mezo[][] m = t.getMezok();
+		Vektor v = new Vektor();		//át kell még írni nincs meg a konstruktor hozzá
+		
+		int i = 0;
+		while (i<5){
+			int sor = rand.nextInt(magassag);
+			int oszlop = rand.nextInt(szelesseg);
+			koordinata[0]=sor;
+			koordinata[1]=oszlop;
+			if(m[sor][oszlop].getPalyaszakasz() == true && m[sor][oszlop].getRobot() == null)
+			{
+				kisrobotok.add(new KisRobot());
+				kisrobotok.get(i).setMezo(m[sor][oszlop]);
+				kisrobotok.get(i).setSebessegvektor(v);		//lehet át lesz adva kisrobot konstruktoába
+				i++;
+			}
+		}
 	}
 
 	/**
@@ -50,14 +86,28 @@ public class Palya {
 	 * @param r
 	 * @param v
 	 */
-	public void kisrobotLeptet(KisRobot r, Vektor v) {
-		// TODO - implement Palya.kisrobotLeptet
-		throw new UnsupportedOperationException();
+	public void kisrobotLeptet(KisRobot r, Vektor v) { // kell a vektor paraméter, egyáltalán kell a függvény 
+		r.lep(v);									
 	}
 
+	//lehet itt is át kell írni hogy a teszteset müködjön
 	public void cpKioszt() {
-		// TODO - implement Palya.cpKioszt
-		throw new UnsupportedOperationException();
+		Random rand = new Random();
+		int [] koordinata = new int[2];
+		Mezo[][] m = t.getMezok();
+		
+		int i = 0;
+		while (i<3){
+			int sor = rand.nextInt(magassag);
+			int oszlop = rand.nextInt(szelesseg);
+			koordinata[0]=sor;
+			koordinata[1]=oszlop;
+			if(m[sor][oszlop].getPalyaszakasz() == true && m[sor][oszlop].getCheckpoint() == false)
+			{
+				m[sor][oszlop].setCheckpoint(true);
+				i++;
+			}
+		}
 	}
 
 	/**
@@ -65,8 +115,7 @@ public class Palya {
 	 * @param r
 	 */
 	public void olajLerak(Robot r) {
-		// TODO - implement Palya.olajLerak
-		throw new UnsupportedOperationException();
+		r.olajLerak();
 	}
 
 	/**
@@ -74,18 +123,26 @@ public class Palya {
 	 * @param r
 	 */
 	public void ragacsLerak(Robot r) {
-		// TODO - implement Palya.ragacsLerak
-		throw new UnsupportedOperationException();
+		r.ragacsLerak();
 	}
 
 	public void gyoztesValaszt() {
-		// TODO - implement Palya.gyoztesValaszt
-		throw new UnsupportedOperationException();
+		int i = 1;
+		Robot nyertes = robotok.get(0);
+		while(i<robotok.size())
+		{
+			if(robotok.get(i).getCheckpoint() > nyertes.getCheckpoint())
+				nyertes = robotok.get(i);
+		}
+		// ide gondolom jönne még egy kiirás lehet kellene visszatérési érték a protohoz
 	}
 
 	public void oregit() {
-		// TODO - implement Palya.oregit
-		throw new UnsupportedOperationException();
+		Mezo[][] m = t.getMezok();
+		for(int i = 0; i<magassag; i++)
+			for(int j = 0; j<szelesseg; j++)
+				if(m[i][j].getAkadaly() != null)
+					m[i][j].getAkadaly().oregit();
 	}
 
 }
