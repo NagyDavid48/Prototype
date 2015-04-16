@@ -1,23 +1,17 @@
 package Prototype;
 
 public class Ragacs extends Akadaly {
-
-	private int elet;
-	private boolean takaritjak;
-
-	//Fuck the police! (and contructors!)
-	{this.elet = 4; this.takaritjak = false;}
+	
+	private int elet = 4;
+	private boolean takaritjak = false;
 	
 	/**
 	 * 
 	 * @param r
 	 */
 	public void viselkedes(Robot r) {
-		
-	}
-
-	public void eletcsokkent() {
-		this.elet--;
+		this.oregit();
+		r.ragacsraLepett();
 	}
 
 	public int getElet() {
@@ -37,9 +31,14 @@ public class Ragacs extends Akadaly {
 	}
 
 	@Override
+	public void eletcsokkent() {
+		if(this.elet>0)
+			this.elet--;
+	}
+
+	@Override
 	public void oregit() {
-		// TODO Auto-generated method stub
-		
+		this.eletcsokkent();
 	}
 
 }

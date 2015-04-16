@@ -3,7 +3,7 @@ package Prototype;
 public abstract class Akadaly {
 	
 	/**
-	 * Ezt a robotot kapja meg es erre hat az akadaly.
+	 * Robotra hato negativ hatast ezzel lehet kivaltani (pl.: megcsuszik, lelassul, stb)
 	 * Minden tipusu akadalyban felul kell definialni.
 	 * @param r - Robot, amire hat az akadaly.
 	 */
@@ -11,7 +11,8 @@ public abstract class Akadaly {
 
 	public abstract void eletcsokkent();
 
+	/**
+	 * Ezt a függvényt lehet hívni kívülről.
+	 */
 	public abstract void oregit();
-
-	// comment git change
 }
