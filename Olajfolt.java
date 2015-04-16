@@ -37,6 +37,7 @@ public class Olajfolt extends Akadaly {
 
 	/**
 	 * Meghivja az elet csokkent fv-t.
+	 * PM hivja minden kor vegen.
 	 */
 	@Override
 	public void oregit() {

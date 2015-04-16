@@ -43,6 +43,8 @@ public class Ragacs extends Akadaly {
 	 * PM hívja.
 	 */
 	@Override
-	public void oregit() {}
+	public void oregit() {
+		//Ido nem hat ra!
+	}
 
 }
