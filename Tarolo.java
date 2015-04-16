@@ -10,14 +10,18 @@ public class Tarolo {
 	 * @param magassag
 	 */
 	public Tarolo(int szelesseg, int magassag) {
-		// TODO - implement Tarolo.operation
-		throw new UnsupportedOperationException();
+		Mezo[][] tmp = new Mezo [magassag][szelesseg];
+		
+		for(int i = 0 ; i<magassag; i++)
+			for(int j = 0 ; j<szelesseg; j++){
+				tmp[i][j] = new Mezo(false, false, null, null, null);
+			}
+		
+		mezok = tmp;
 	}
 
 	public Mezo[][] getMezok() {
-		//Mezo
 		return this.mezok;
-		
 	}
 
 	/**
@@ -25,8 +29,7 @@ public class Tarolo {
 	 * @param koordinata
 	 */
 	public Mezo getMezo(int[] koordinata) {
-		// TODO - implement Tarolo.getMezo
-		throw new UnsupportedOperationException();
+		return mezok[koordinata[0]][koordinata[1]];
 	}
 
 }
