@@ -6,8 +6,8 @@ public class Ragacs extends Akadaly {
 	private boolean takaritjak = false;
 	
 	/**
-	 * 
-	 * @param r
+	 * A robot sebessége megfelezõdik.
+	 * @param r - Ez lépett a ragacsba.
 	 */
 	public void viselkedes(Robot r) {
 		this.oregit();
@@ -23,22 +23,26 @@ public class Ragacs extends Akadaly {
 	}
 
 	/**
-	 * 
-	 * @param takaritjak
+	 * Kisrobot takaríthatja ezt az akadályt és amikor rálép, akkor hívódik.
+	 * @param takaritjak - Takarítják-e.
 	 */
 	public void setTakaritjak(boolean takaritjak) {
 		this.takaritjak = takaritjak;
 	}
-
+	
+	/**
+	 * A ragacs életét csökkenti eggyel.
+	 */
 	@Override
 	public void eletcsokkent() {
 		if(this.elet>0)
 			this.elet--;
 	}
 
+	/**
+	 * PM hívja.
+	 */
 	@Override
-	public void oregit() {
-		this.eletcsokkent();
-	}
+	public void oregit() {}
 
 }
