@@ -61,7 +61,7 @@ public class Vektor {
 	
 	/**
 	 * Egy skalárral osztja a koordinatakat. 
-	 * Egesz osztast vegezz! (/)
+	 * Egesz osztast vegezz! (/) Nem kerekit! 3/2 = 1!!!
 	 * @param skalar - A szam, mivel oszt.
 	 */
 	public void skalarOszt(int skalar){
