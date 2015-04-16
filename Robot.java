@@ -34,11 +34,18 @@ public class Robot extends Robotok {
 		sebessegvektor.addVektor(v);
 		Vektor poz = mezo.getPoziciovektor();
 		Mezo mezo_c = t.getMezo(vektorAtvalt(poz));
+		
 		if(mezo_c.getPalyaszakasz() == false){
 			this.kiesett = true;
 		}else if(mezo_c.getRobot() != null){
 			Robot r = mezo_c.getRobot();
-			r.utkozes(this);
+			int eredmeny = r.utkozes(this);
+			if(eredmeny == 0)
+				this.mezo = mezo_c;
+			else{
+				this.mezo = null;
+				this.setKiesett(true);
+			}
 			//ide kell még az ütközés kezelése 
 		}else if(mezo_c.getAkadaly() != null){
 			Akadaly a = mezo_c.getAkadaly();
@@ -183,10 +190,12 @@ public class Robot extends Robotok {
 		int x = this.compareTo(r.getSebessegvektor());
 		if(x <= 0){//Ha az allo volt a lassabb vagy egyenloek voltak.
 			this.setKiesett(true);//Kiesett és a mezõt már átállítottuk null-ra, hiszen ez ugrik
-			r.setMezo(this.mezo);
+			this.setMezo(null);
 			return 0;
 		}
-		return 1;//Az allo volt a gyorsabb, az ugro pusztul.
+		else{
+			return 1;//Az allo volt a gyorsabb, az ugro pusztul.
+		}
 	}
 
 	/**
