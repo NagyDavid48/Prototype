@@ -38,7 +38,7 @@ public class Robot extends Robotok {
 		if(mezo_c.getPalyaszakasz() == false){
 			this.kiesett = true;
 		}else if(mezo_c.getRobot() != null){
-			Robot r = mezo_c.getRobot();
+			Robotok r = mezo_c.getRobot();
 			int eredmeny = r.utkozes(this);
 			if(eredmeny == 0)
 				this.mezo = mezo_c;

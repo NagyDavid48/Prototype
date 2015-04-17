@@ -14,7 +14,7 @@ public class Tarolo {
 		
 		for(int i = 0 ; i<magassag; i++)
 			for(int j = 0 ; j<szelesseg; j++){
-				tmp[i][j] = new Mezo(false, false, false, null);	
+				tmp[i][j] = new Mezo(false, false, null, null, null);	
 			}
 		
 		mezok = tmp;
