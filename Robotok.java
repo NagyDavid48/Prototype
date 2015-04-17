@@ -4,26 +4,28 @@ public abstract class Robotok {
 	protected Tarolo t; //Asszociáció miatt
 	
 	/**
-	 * 
-	 * @param v
+	 * A robotokat lepteti.
+	 * Minden fajta robot mashogy lep.
+	 * @param v - Uj sebesseg vektor.
 	 */
 	public abstract int[] lep(Vektor v);
 
 	/**
-	 * 
-	 * @param v
+	 * Vektorbol csinal mezo indexet.
+	 * @param v - Uj seb. v.
 	 */
 	public abstract int[] vektorAtvalt(Vektor v);
 
 	/**
-	 * 
-	 * @param r
+	 * Utkozes kezelesere.
+	 * @param r - Ugro robot.
 	 */
 	public abstract int utkozes(Robot r);
 
 	/**
-	 * 
-	 * @param r
+	 * Kisrobotok mashogy viselkednek.
+	 * Muszaj egy maik fv. erre.
+	 * @param r - Ugro kis robot.
 	 */
 	public abstract void utkozes(KisRobot r);
 
