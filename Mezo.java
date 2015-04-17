@@ -5,19 +5,23 @@ public class Mezo {
 	private boolean checkpoint;
 	private boolean palyaszakasz;
 	private Akadaly akadaly;
-	private Robot robot;
+	private Robotok robot;
 	private Vektor poziciovektor;
 
 	/**
 	 * 
 	 * @param checkp
+	 * @param palyaszak
 	 * @param akadaly
 	 * @param robot
 	 * @param pozicio
 	 */
-	public Mezo(boolean checkp, boolean akadaly, boolean robot, Vektor pozicio) {
-		// TODO - implement Mezo.Mezo
-		throw new UnsupportedOperationException();
+	public Mezo(boolean checkp, boolean palyaszak, Akadaly akadaly, Robotok robot, Vektor pozicio) {
+		this.checkpoint = checkp;
+		this.palyaszakasz = palyaszak;
+		this.akadaly = akadaly;
+		this.robot = robot;
+		this.poziciovektor = pozicio;
 	}
 
 	public boolean getCheckpoint() {
@@ -45,8 +49,7 @@ public class Mezo {
 	}
 
 	public Akadaly getAkadaly() {
-		// TODO - implement Mezo.getAkadaly
-		throw new UnsupportedOperationException();
+		return this.akadaly;
 	}
 
 	/**
@@ -54,11 +57,10 @@ public class Mezo {
 	 * @param akadaly
 	 */
 	public void setAkadaly(Akadaly akadaly) {
-		// TODO - implement Mezo.setAkadaly
-		throw new UnsupportedOperationException();
+		this.akadaly = akadaly;
 	}
 
-	public Robot getRobot() {
+	public Robotok getRobot() {
 		return this.robot;
 	}
 
@@ -66,7 +68,7 @@ public class Mezo {
 	 * 
 	 * @param robot
 	 */
-	public void setRobot(Robot robot) {
+	public void setRobot(Robotok robot) {
 		this.robot = robot;
 	}
 
