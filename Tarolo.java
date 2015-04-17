@@ -31,5 +31,10 @@ public class Tarolo {
 	public Mezo getMezo(int[] koordinata) {
 		return mezok[koordinata[0]][koordinata[1]];
 	}
+	
+	public void probafuggveny(){
+	// git tesztelésére
+	}
+	
 
 }

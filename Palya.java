@@ -6,10 +6,10 @@ import java.util.Random;
 public class Palya {
 
 	private int soronlevo;					//gyõztesválasztásnál lehet kelleni fog neki getter setter
-	private ArrayList<Robot> robotok;
-	private ArrayList<KisRobot> kisrobotok;
+	public ArrayList<Robot> robotok;
+	public ArrayList<KisRobot> kisrobotok;
 	
-	private Tarolo t; //Asszociációs kapcsolatból
+	public Tarolo t; //Asszociációs kapcsolatból
 	
 	//egyszerûbb randomgeneráláshoz tagváltozók
 	private int szelesseg;	

@@ -5,6 +5,7 @@ public class Palya_Menedzser {
 	private int kor;//Ennyi a max korok szama
 	private int olajkeszlet;//Ennyi olaja lesz egy robotnak
 	private int ragacskeszlet;//Ennyi ragacsa lesz egy robotnak
+	private int robotszam;//Ennyi robot lesz a pályán
 	public Palya palya;//A keret el tudja hívni a pálya fv-it.
 
 	/**
@@ -20,8 +21,13 @@ public class Palya_Menedzser {
 		this.kor = kor;
 		this.ragacskeszlet = ragacs;
 		this.olajkeszlet = olaj;
+		this.robotszam = robotszam;
 		this.palya = new Palya(szelesseg, magassag, robotszam, olaj, ragacs);
 	}
+	
+	
+
+	public Palya_Menedzser(){}
 	
 	//Valahogy meg kell oldani az inputok feldolgozasat. - Megbeszeles.
 	
@@ -75,4 +81,11 @@ public class Palya_Menedzser {
 		this.ragacskeszlet = ragacskeszlet;
 	}
 
+	/**
+	 * Ennyi robot lesz a pályán
+	 * @param robotszam - Robot szam.
+	 */
+	public void setRobotszam(int robotszam) {
+		this.robotszam = robotszam;
+	}
 }
