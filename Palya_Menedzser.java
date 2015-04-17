@@ -43,7 +43,7 @@ public class Palya_Menedzser {
 				if(kor % 3 == 0)//Minden negyedik kor vegen kiosztjuk a cp-ket.
 					palya.cpKioszt();
 				if(kor%5==0)//Lasd szekvencia
-					palya.kisrobotLetrehoz();
+					palya.kisrobotLetrehoz();//Release the MiniRobots!
 				palya.oregit();//Olaj szaradasa
 			}else{//Itt van vege a jateknak.
 				palya.gyoztesValaszt();
