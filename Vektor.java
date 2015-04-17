@@ -84,6 +84,31 @@ public class Vektor {
 	public double hossz(){
 		return Math.sqrt(x*x + y*y);
 	}
+	
+	/**
+	 * A vektort elosztja 10-zel, majd ha valamelyik paros
+	 * hozzaad 1-et. Vegul megszorozza 10-zel.
+	 */
+	public void kerekit(){
+		this.skalarOszt(10);
+		if(x%2==0)
+			x++;
+		if(y%2==0)
+			y++;
+		this.skalarSzoroz(10);
+	}
+	
+	/**
+	 * A kerekitett koordinatakat elosztja tizzel,
+	 * (n-1)/2 kepletet alkalmazza rajtuk.
+	 * @return - Ket elemu index tomb.
+	 */
+	public int[] indexSzamol(){
+		this.skalarOszt(10);
+		this.x = (x-1)/2;
+		this.y = (y-1)/2;
+		return new int[] {x,y};
+	}
 
 	public int getY() {
 		return y;
@@ -99,6 +124,10 @@ public class Vektor {
 
 	public void setX(int x) {
 		this.x = x;
+	}
+	
+	public void vektorKiir(){
+		System.out.print(""+x+" "+y);
 	}
 
 }

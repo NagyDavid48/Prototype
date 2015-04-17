@@ -5,8 +5,9 @@ public class Palya_Menedzser {
 	private int kor;//Ennyi a max korok szama
 	private int olajkeszlet;//Ennyi olaja lesz egy robotnak
 	private int ragacskeszlet;//Ennyi ragacsa lesz egy robotnak
+	public Palya palya;//A keret el tudja hívni a pálya fv-it. PM.palya.elmennek.aPicsaba();
 	private int robotszam;//Ennyi robot lesz a pályán
-	public Palya palya;//A keret el tudja hívni a pálya fv-it.
+	private boolean isVege = false;
 
 	/**
 	 * PM Letrehozasa.
@@ -22,6 +23,7 @@ public class Palya_Menedzser {
 		this.ragacskeszlet = ragacs;
 		this.olajkeszlet = olaj;
 		this.robotszam = robotszam;
+		//this.robocntr = 0;
 		this.palya = new Palya(szelesseg, magassag, robotszam, olaj, ragacs);
 	}
 	
@@ -39,13 +41,18 @@ public class Palya_Menedzser {
 	 * Minden esetben a palya egy fv-jét hívja meg.
 	 */
 	public void korSzamol() {
-		kor--;
-		if(kor>0){//Megy a jatek
-			if(kor % 4 == 0)//Minden negyedik kor vegen kiosztjuk a cp-ket.
-				palya.cpKioszt();
-			palya.oregit();//Olaj szaradasa
-		}else{//Itt van vege a jateknak.
-			palya.gyoztesValaszt();
+		if(!isVege){//Ha nincs vege a jateknak.
+			kor--;
+			if(kor>0){//Megy a jatek
+				if(kor % 3 == 0)//Minden negyedik kor vegen kiosztjuk a cp-ket.
+					palya.cpKioszt();
+				if(kor%5==0)//Lasd szekvencia
+					palya.kisrobotLetrehoz();//Release the MiniRobots!
+				palya.oregit();//Olaj szaradasa
+			}else{//Itt van vege a jateknak.
+				palya.gyoztesValaszt();
+				isVege = true;
+			}
 		}
 	}
 

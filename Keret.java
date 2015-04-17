@@ -9,6 +9,7 @@ public class Keret {
 			while(cmd.isEnded != true)
 				cmd.fun(cmd.readCommand());
 		}catch(Exception e){System.out.println(e.getMessage());}
+
 	}
 	
 	
