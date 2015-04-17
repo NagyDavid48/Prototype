@@ -25,6 +25,6 @@ public abstract class Robotok {
 	 * 
 	 * @param r
 	 */
-	public abstract int utkozes(KisRobot r);
+	public abstract void utkozes(KisRobot r);
 
 }

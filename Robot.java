@@ -71,15 +71,25 @@ public class Robot extends Robotok {
 	}
 
 	/**
-	 * 
-	 * @param v
+	 * A lepeshez atvaltja a vektorokat mezo indexe.
+	 * Osszeadja az uj seb.v.-t es a jelenlegi seb. v.-t es elosztja 10-zel.
+	 * Ha valamelyik koordinata paros, hozza ad egyet.
+	 * Szorozza 10-zel a vektort.
+	 * (n-1)/2-t alkalmazva a koordinatakon egy-egy 10-zel valo osztas utan kesz az index. 
+	 * @param v - Az uj sebesseg vektor.
 	 */
 	public int[] vektorAtvalt(Vektor v) {
 		Vektor pozicio = sebessegvektor.addVektor2(v);
 		pozicio.skalarOszt(10);
+		if(pozicio.getX()%2==0)
+			pozicio.setX(pozicio.getX()+1);
+		if(pozicio.getY()%2==0)
+			pozicio.setY(pozicio.getY()+1);
+		pozicio.skalarSzoroz(10);
+		
 		int[] tmp = new int[2];
-		tmp[0] = pozicio.getX();
-		tmp[1] = pozicio.getY();
+		tmp[0] = ((pozicio.getX()/10)-1)/2;
+		tmp[1] = ((pozicio.getY()/10)-1)/2;
 		return tmp;
 	}
 	
@@ -184,10 +194,10 @@ public class Robot extends Robotok {
 	 * @param r - Ez a robot ugrott erre a robotra.
 	 */
 	public int utkozes(Robot r) {
-		int x = this.compareTo(r.getSebessegvektor());
+		int x = this.compareTo(r.getSebessegvektor());//Hasonlitas
 		if(x <= 0){//Ha az allo volt a lassabb vagy egyenloek voltak.
 			this.setKiesett(true);//Kiesett és a mezõt már átállítottuk null-ra, hiszen ez ugrik
-			this.setMezo(null);
+			this.setMezo(null);//Mivel mar nam letezik a mezon sem all
 			return 0;
 		}
 		else{
@@ -198,11 +208,16 @@ public class Robot extends Robotok {
 	/**
 	 * Kis Robot - Nagy Robot utkozese.
 	 * A kisrobot raugrik a nagyra, ekkor vissza kerul az eredeti poziciojara.
+	 * Lepattan a nagyrol.
 	 * @param r - Kis robot, ami ra ugrik a nagyra.
 	 */
-	public int utkozes(KisRobot r) {
+	public void utkozes(KisRobot r) {
+		Vektor tmp = r.getSebessegvektor();//Aktualis seb. v.
+		tmp.skalarSzoroz(-1);//Vissza kell pattania.
+		r.lep(tmp);//Ezzel leptetjuk vissza. Remelhetoleg a kiindulasi mezobe ter vissza.
+		tmp.skalarSzoroz(-1);//Az eredeti vektort vissza kellene allitani.
+		r.setSebessegvektor(tmp);
 		
-		return 0;//Kell még.
 	}
 
 }
