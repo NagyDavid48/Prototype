@@ -154,18 +154,10 @@ public class Robot extends Robotok {
 	 * @param v - Másik robot vektora.
 	 */
 	private int compareTo(Vektor v) {
-		if(this.sebessegvektor.getX() < v.getX() && this.sebessegvektor.getY() == v.getY())
-			return -1;//Ha csak a x kissebb
-		else if(this.sebessegvektor.getX() == v.getX() && this.sebessegvektor.getY() < v.getY())
-			return -1;//Ha csak a y kissebb
-		else if(this.sebessegvektor.getX() < v.getX() && this.sebessegvektor.getY() < v.getY())
-			return -1;//Ha mindketto kissebb
-		else if(this.sebessegvektor.getX() > v.getX() && this.sebessegvektor.getY() == v.getY())
-			return 1;//Ha csak  x nagyobb
-		else if(this.sebessegvektor.getX() == v.getX() && this.sebessegvektor.getY() > v.getY())
-			return 1;//Ha csak a y nagyobb
-		else if(this.sebessegvektor.getX() > v.getX() && this.sebessegvektor.getY() > v.getY())
-			return 1;//Ha mindketto nagyobb
+		if(this.sebessegvektor.hossz() < v.hossz())
+			return -1;//Ha mindketto hossza kissebb
+		else if(this.sebessegvektor.hossz() > v.hossz())
+			return 1;//Ha mindketto hossza nagyobb
 		return 0;//Ha egyenloek
 	}
 
