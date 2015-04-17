@@ -31,10 +31,10 @@ public class Command {
 			robo_le(cmd);
 		if (cmd[0].equals("robo_vek")) // robot vektorát beállítja
 			robo_vek(cmd);
-		if (cmd[0].equals("robo_olr"))
-			exit(cmd);
-		if (cmd[0].equals("robo_rlr"))
-			exit(cmd);
+		if (cmd[0].equals("robo_olr")) // robot olajat rak le
+			robo_olr(cmd);
+		if (cmd[0].equals("robo_rlr")) // robot ragacsot rak le
+			robo_rlr(cmd);
 		if (cmd[0].equals("krl"))
 			exit(cmd);
 		if (cmd[0].equals("olr"))
@@ -60,6 +60,20 @@ public class Command {
 		if (cmd[0].equals("Kilepes"))
 			exit(cmd);
 		
+	}
+	
+	private void robo_rlr(String[] cmd) {
+		// TODO Auto-generated method stub
+		int index = Integer.parseInt(cmd[1]);
+//		int elet = Integer.parseInt(cmd[2]);
+		pm.palya.robotok.get(index).ragacsLerak();;
+	}
+
+	private void robo_olr(String[] cmd) {
+		// TODO Auto-generated method stub
+		int index = Integer.parseInt(cmd[1]);
+//		int elet = Integer.parseInt(cmd[2]);
+		pm.palya.robotok.get(index).olajLerak();
 	}
 
 	private void robo_vek(String[] cmd) {
