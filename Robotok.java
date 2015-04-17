@@ -8,7 +8,7 @@ public abstract class Robotok {
 	 * Minden fajta robot mashogy lep.
 	 * @param v - Uj sebesseg vektor.
 	 */
-	public abstract int[] lep(Vektor v);
+	public abstract void lep(Vektor v);
 
 	/**
 	 * Vektorbol csinal mezo indexet.

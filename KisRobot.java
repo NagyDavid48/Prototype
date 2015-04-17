@@ -42,7 +42,7 @@ public class KisRobot extends Robotok {
 	 * 
 	 * @param v
 	 */
-	public int[] lep(Vektor v) {
+	public void lep(Vektor v) {
 		// TODO - implement KisRobot.lep
 		throw new UnsupportedOperationException();
 	}
@@ -100,9 +100,8 @@ public class KisRobot extends Robotok {
 	}
 
 	/**
-	 * Kis robot - Kis robot.
-	 * Egy kicsi egy másik kicsire ugrik. Az ugro lepattan az allorol.
-	 * @param r - Ez a robot ugrik az allora.
+	 * 
+	 * @param r
 	 */
 	public void utkozes(KisRobot r) {
 		// TODO - implement KisRobot.utkozes

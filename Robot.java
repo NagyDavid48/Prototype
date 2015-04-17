@@ -30,7 +30,7 @@ public class Robot extends Robotok {
 	 * @param v
 	 */
 	// Elvileg kész
-	public int[] lep(Vektor v) {				//lehet már nincs is szükség erre a visszatérési értékre
+	public void lep(Vektor v) {				//lehet már nincs is szükség erre a visszatérési értékre
 		sebessegvektor.addVektor(v);
 		Vektor poz = mezo.getPoziciovektor();
 		Mezo mezo_c = t.getMezo(vektorAtvalt(poz));
@@ -66,8 +66,6 @@ public class Robot extends Robotok {
 		
 		if(this.kiesett == false)
 			this.mezo = mezo_c;
-		
-		return null;
 	}
 
 	/**
