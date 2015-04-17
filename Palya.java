@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Palya {
 
-	private int soronlevo;
+	private int soronlevo;					//gyõztesválasztásnál lehet kelleni fog neki getter setter
 	private ArrayList<Robot> robotok;
 	private ArrayList<KisRobot> kisrobotok;
 	
@@ -24,14 +24,18 @@ public class Palya {
 	 * @param ragacs
 	 */
 	public Palya(int szelesseg, int magassag, int robotszam, int olaj, int ragacs) {
+		this.robotok = new ArrayList<Robot>();
+		this.kisrobotok = new ArrayList<KisRobot>();
 		this.magassag = magassag;
 		this.szelesseg = szelesseg;
 		soronlevo = 0;
 		
 		//hogyan állítsuk be a mezõk specialításait akadály, robot, cp, szakadek 
+		//Egyelõre meredt úgy hogy sima mezõket hoz létre nincs rajta semmi és nem szakadék
 		t = new Tarolo(szelesseg, magassag);
 		
 		//robot melyik mezõre kerüljön, mi alapján válasszunk random normál üres mezõ?
+		//Egyelõre valószínûleg a keretprogram fogja megmondani
 		for(int i = 0; i<robotszam; i++)
 			robotok.add(new Robot(olaj,ragacs));
 	}
@@ -68,7 +72,6 @@ public class Palya {
 		Random rand = new Random();
 		int [] koordinata = new int[2];
 		Mezo[][] m = t.getMezok();
-		Vektor v = new Vektor();		//át kell még írni nincs meg a konstruktor hozzá
 		
 		int i = 0;
 		while (i<5){
@@ -78,9 +81,8 @@ public class Palya {
 			koordinata[1]=oszlop;
 			if(m[sor][oszlop].getPalyaszakasz() == true && m[sor][oszlop].getRobot() == null)
 			{
-				kisrobotok.add(new KisRobot());
+				kisrobotok.add(new KisRobot());		//kisrobot konstruktoába létrehozza magának a vektorát
 				kisrobotok.get(i).setMezo(m[sor][oszlop]);
-				kisrobotok.get(i).setSebessegvektor(v);		//lehet át lesz adva kisrobot konstruktoába
 				i++;
 			}
 		}
@@ -91,11 +93,12 @@ public class Palya {
 	 * @param r
 	 * @param v
 	 */
-	public void kisrobotLeptet(KisRobot r, Vektor v) { // kell a vektor paraméter, egyáltalán kell a függvény 
+	public void kisrobotLeptet(KisRobot r, Vektor v) { 
 		r.lep(v);									
 	}
 
 	//lehet itt is át kell írni hogy a teszteset müködjön
+	//most úgy van megírva hogy ahol robot van ode nem kerülhet akadály kerülhessen a robot alá is ? :D
 	public void cpKioszt() {
 		Random rand = new Random();
 		int [] koordinata = new int[2];
@@ -142,6 +145,7 @@ public class Palya {
 				nyertes = robotok.get(i);
 		}
 		// ide gondolom jönne még egy kiirás lehet kellene visszatérési érték a protohoz
+		
 	}
 
 	//elvileg kész
@@ -152,5 +156,7 @@ public class Palya {
 				if(m[i][j].getAkadaly() != null)
 					m[i][j].getAkadaly().oregit();
 	}
+	
+	
 
 }
