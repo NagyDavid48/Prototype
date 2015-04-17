@@ -154,10 +154,23 @@ public class Palya {
 	//elvileg kész
 	public void oregit() {
 		Mezo[][] m = t.getMezok();
-		for(int i = 0; i<magassag; i++)
-			for(int j = 0; j<szelesseg; j++)
-				if(m[i][j].getAkadaly() != null)
+		int elet;
+		int k = 0;
+		for(int i = 0; i<magassag; i++){
+			for(int j = 0; j<szelesseg; j++){
+				if(m[i][j].getAkadaly() != null){
 					m[i][j].getAkadaly().oregit();
+					elet = m[i][j].getAkadaly().getElet();
+					if(elet==0){
+						m[i][j].setAkadaly(null);
+						while (k<kisrobotok.size()){
+							if(m[i][j] == kisrobotok.get(i).getMezo())
+								kisrobotok.get(i).setFoltonvan(false);
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	
