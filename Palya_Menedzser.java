@@ -5,7 +5,7 @@ public class Palya_Menedzser {
 	private int kor;//Ennyi a max korok szama
 	private int olajkeszlet;//Ennyi olaja lesz egy robotnak
 	private int ragacskeszlet;//Ennyi ragacsa lesz egy robotnak
-	private Palya palya;//Ez a játék tér
+	public Palya palya;//A keret el tudja hívni a pálya fv-it.
 
 	/**
 	 * PM Letrehozasa.

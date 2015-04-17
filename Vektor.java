@@ -76,6 +76,14 @@ public class Vektor {
 	public void atlagol(Vektor v){
 		this.setVektor(new Vektor((x+v.getX())/2,(y+v.getY())/2));
 	}
+	
+	/**
+	 * Megadja a vektor hosszat.
+	 * @return - Vektor hossza. DOUBLE!!!!
+	 */
+	public double hossz(){
+		return Math.sqrt(x*x + y*y);
+	}
 
 	public int getY() {
 		return y;
