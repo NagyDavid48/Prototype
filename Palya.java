@@ -28,7 +28,7 @@ public class Palya {
 		this.kisrobotok = new ArrayList<KisRobot>();
 		this.magassag = magassag;
 		this.szelesseg = szelesseg;
-		soronlevo = 0;
+		this.soronlevo = 0;
 		
 		//hogyan állítsuk be a mezõk specialításait akadály, robot, cp, szakadek 
 		//Egyelõre meredt úgy hogy sima mezõket hoz létre nincs rajta semmi és nem szakadék
@@ -47,7 +47,7 @@ public class Palya {
 	//elvileg kész
 	public void vektorFeldolgoz(Vektor v) {
 		robotLeptet(robotok.get(soronlevo),v);
-		if(soronlevo++ == robotok.size()){
+		if(soronlevo++ == robotok.size() && kisrobotok.size() != 0){
 			int i = 0;
 			while(i<kisrobotok.size())
 			{
@@ -94,7 +94,10 @@ public class Palya {
 	 * @param v
 	 */
 	public void kisrobotLeptet(KisRobot r, Vektor v) { 
-		r.lep(v);									
+			if(r.getFoltonvan() == true)
+				r.takarit();
+			else
+				r.lep(v);
 	}
 
 	//lehet itt is át kell írni hogy a teszteset müködjön
@@ -151,11 +154,26 @@ public class Palya {
 	//elvileg kész
 	public void oregit() {
 		Mezo[][] m = t.getMezok();
-		for(int i = 0; i<magassag; i++)
-			for(int j = 0; j<szelesseg; j++)
-				if(m[i][j].getAkadaly() != null)
+		int elet;
+		int k = 0;
+		for(int i = 0; i<magassag; i++){
+			for(int j = 0; j<szelesseg; j++){
+				if(m[i][j].getAkadaly() != null){
 					m[i][j].getAkadaly().oregit();
+					elet = m[i][j].getAkadaly().getElet();
+					if(elet==0){
+						m[i][j].setAkadaly(null);
+						while (k<kisrobotok.size()){
+							if(m[i][j] == kisrobotok.get(i).getMezo())
+								kisrobotok.get(i).setFoltonvan(false);
+						}
+					}
+				}
+			}
+		}
 	}
+	
+	
 	
 	
 
