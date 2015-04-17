@@ -12,7 +12,7 @@ public class Ragacs extends Akadaly {
 	 * @param r - Ez lépett a ragacsba.
 	 */
 	public void viselkedes(Robot r) {
-		this.oregit();
+		this.eletcsokkent();
 		r.ragacsraLepett();
 	}
 

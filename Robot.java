@@ -29,15 +29,16 @@ public class Robot extends Robotok {
 	 * 
 	 * @param v
 	 */
-	// if szerkezetet még át kell gondolni
+	// Elvileg kész
 	public int[] lep(Vektor v) {				//lehet már nincs is szükség erre a visszatérési értékre
 		sebessegvektor.addVektor(v);
 		Vektor poz = mezo.getPoziciovektor();
 		Mezo mezo_c = t.getMezo(vektorAtvalt(poz));
 		
-		if(mezo_c.getPalyaszakasz() == false){
+		if(mezo_c.getPalyaszakasz() == false)
 			this.kiesett = true;
-		}else if(mezo_c.getRobot() != null){
+		
+		if(mezo_c.getRobot() != null && this.kiesett == false){
 			Robotok r = mezo_c.getRobot();
 			int eredmeny = r.utkozes(this);
 			if(eredmeny == 0)
@@ -46,21 +47,25 @@ public class Robot extends Robotok {
 				this.mezo = null;
 				this.setKiesett(true);
 			}
-			//ide kell még az ütközés kezelése 
-		}else if(mezo_c.getAkadaly() != null){
+		}
+		
+		if(mezo_c.getAkadaly() != null && this.kiesett == false){
 			Akadaly a = mezo_c.getAkadaly();
-			//akadaly életének lekérdezése kellene az Akadályba
-			int elet = 2; //a.getElet();
-			if(elet == 0){
-				mezo_c.setAkadaly(null);
-			}else{
-				a.viselkedes(this);
-			}
-		}else if(mezo_c.getCheckpoint() == true){
+			int elet = a.getElet();
+				if(elet == 0){
+					mezo_c.setAkadaly(null);
+				}else{
+					a.viselkedes(this);
+				}
+		}
+		
+		if(mezo_c.getCheckpoint() == true && this.kiesett == false){
 			this.addCheckpoint();
 			mezo_c.setCheckpoint(false);
 		}
-		this.mezo = mezo_c;
+		
+		if(this.kiesett == false)
+			this.mezo = mezo_c;
 		
 		return null;
 	}
