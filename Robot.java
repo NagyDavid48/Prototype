@@ -22,7 +22,7 @@ public class Robot extends Robotok {
 		this.kiesett = false;
 		this.checkpoint = 0;
 		this.sebessegvektor = new Vektor();//(0;0)
-		//this.mezo = null;					//mezõ kérdése itt is
+		this.mezo = null;		//mezõ kérdése itt is
 	}
 
 	/**
