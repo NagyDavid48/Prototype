@@ -8,8 +8,10 @@ public class KisRobot extends Robotok {
 	private boolean kiesett;
 
 	public KisRobot() {
-		// TODO - implement KisRobot.KisRobot
-		throw new UnsupportedOperationException();
+		sebessegvektor = new Vektor(10, 10);
+		mezo = null;
+		foltonvan = false;
+		kiesett = false;
 	}
 
 	public boolean getFoltonvan() {
@@ -74,8 +76,18 @@ public class KisRobot extends Robotok {
 	 * @param v
 	 */
 	public int[] vektorAtvalt(Vektor v) {
-		// TODO - implement KisRobot.vektorAtvalt
-		throw new UnsupportedOperationException();
+		Vektor pozicio = sebessegvektor.addVektor2(v);
+		pozicio.skalarOszt(10);
+		if(pozicio.getX()%2==0)
+			pozicio.setX(pozicio.getX()+1);
+		if(pozicio.getY()%2==0)
+			pozicio.setY(pozicio.getY()+1);
+		pozicio.skalarSzoroz(10);
+		
+		int[] tmp = new int[2];
+		tmp[0] = ((pozicio.getX()/10)-1)/2;
+		tmp[1] = ((pozicio.getY()/10)-1)/2;
+		return tmp;
 	}
 
 	/**
@@ -97,8 +109,11 @@ public class KisRobot extends Robotok {
 	}
 
 	public void takarit() {
-		// TODO - implement KisRobot.takarit
-		throw new UnsupportedOperationException();
+		if(mezo.getAkadaly().getElet()==0){
+				mezo.setAkadaly(null);
+				this.setFoltonvan(false);
+		}
+		mezo.getAkadaly().eletcsokkent();
 	}
 
 }
