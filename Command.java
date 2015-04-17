@@ -29,8 +29,8 @@ public class Command {
 			lep(cmd);
 		if (cmd[0].equals("robo_le")) // robotot lerak
 			robo_le(cmd);
-		if (cmd[0].equals("robo_vek"))
-			exit(cmd);
+		if (cmd[0].equals("robo_vek")) // robot vektorát beállítja
+			robo_vek(cmd);
 		if (cmd[0].equals("robo_olr"))
 			exit(cmd);
 		if (cmd[0].equals("robo_rlr"))
@@ -60,6 +60,13 @@ public class Command {
 		if (cmd[0].equals("Kilepes"))
 			exit(cmd);
 		
+	}
+
+	private void robo_vek(String[] cmd) {
+		// TODO Auto-generated method stub
+		int index = Integer.parseInt(cmd[1]);
+		Vektor v = new Vektor(Integer.parseInt(cmd[2]), Integer.parseInt(cmd[3]));
+		pm.palya.robotok.get(index).setSebessegvektor(v);
 	}
 
 	private void robo_le(String[] cmd) {
