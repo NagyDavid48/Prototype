@@ -1,5 +1,7 @@
 package Prototype;
 
+import java.io.PrintWriter;
+
 public abstract class Akadaly {
 	
 	protected int elet;//Akadaly elete
@@ -51,5 +53,5 @@ public abstract class Akadaly {
 		this.takaritjak = takaritjak;
 	}
 	
-	public void kiirstat(){}
+	public void kiirstat(PrintWriter w){}
 }

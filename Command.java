@@ -1,23 +1,25 @@
 package Prototype;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class Command {
 	Palya_Menedzser pm;
 	protected boolean isEnded = false;                                   // ezt állítjuk be, ha megállt a program
-	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-	public String[] readCommand() throws IOException {
-		System.out.print("> ");
+//	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	public String[] readCommand(BufferedReader reader) throws IOException {
 		return reader.readLine().split(" ");                             // space-ek mentén daraboljuk a beírt parancsot
 	}
 	/**
 	 * parancsok
 	 * @param cmd - a beírt string sor tömbbe rendezve
 	 */
-	protected void fun(String[] cmd) {
+	protected void fun(String[] cmd, PrintWriter writer) {
 		if (cmd[0].equals("uj_jatek")) // új játékot kezd
 			uj_jatek(cmd);
 		else if (cmd[0].equals("rag_be")) // beállítja a robotok ragacskészletét
@@ -53,29 +55,32 @@ public class Command {
 		else if (cmd[0].equals("szakadek_be")) // szakadékot állít be
 			szakadek_be(cmd);
 		else if (cmd[0].equals("KiirRobot")) // kiírja a robotok adatait
-			kiirrobot(cmd);
+			kiirrobot(cmd, writer);
 		else if (cmd[0].equals("KiirKisRobot")) // kiírja a kisrobotok adatait
-			kiirkisrobot(cmd);
+			kiirkisrobot(cmd, writer);
 		else if (cmd[0].equals("KiirPalya")) // kiírja a pálya adatait
-			kiirpalya(cmd);
+			kiirpalya(cmd, writer);
 		else if (cmd[0].equals("KiirMezo")) // kiírja a mezõ adatait
-			kiirmezo(cmd);
+			kiirmezo(cmd, writer);
 		else if (cmd[0].equals("KiirAllas")) //kiírja az állást
-			kiirallas(cmd);
+			kiirallas(cmd, writer);
 		else if (cmd[0].equals("Kilepes")) // kilép a programból
 			exit(cmd);
-		else System.out.println("ervenytelen parancs");
+		else System.out.println("érvénytelen parancs");
 		
 	}
 	
-	private void kiirallas(String[] cmd) {
+	private void kiirallas(String[] cmd, PrintWriter w) {
 		System.out.print(pm.getKor()+" "); // hátralevõ körök
-		for (int i = 0; i < pm.palya.robotok.size(); i++)
-			System.out.print(pm.palya.robotok.get(i).getCheckpoint()+" "); // robotok checkpontjai
-		System.out.println(pm.palya.gyoztesValaszt()); // aktuális gyõztes
+		for (int i = 0; i < pm.palya.robotok.size(); i++){
+			System.out.print(pm.palya.robotok.get(i).getCheckpoint()+" ");				// robotok checkpontjai
+			w.print(pm.palya.robotok.get(i).getCheckpoint()+" ");
+		}
+		System.out.println(pm.palya.gyoztesValaszt());                   				// aktuális gyõztes
+		w.println(pm.palya.gyoztesValaszt());
 	}
 
-	private void kiirmezo(String[] cmd) {
+	private void kiirmezo(String[] cmd, PrintWriter w) {
 		if (cmd.length == 3){
 			int[] koord = new int[2];				//
 			try {
@@ -83,8 +88,9 @@ public class Command {
 				koord[1] = Integer.parseInt(cmd[2]);	//
 				Mezo m = pm.palya.t.getMezo(koord);		// a megadott koordinátából meghatározzuk a mezõt
 				System.out.print(koord[0]+" "+koord[1]+" "+m.getCheckpoint()+" "); //kiírjuk a koordinátát + hogy checkpoint-e
+				w.print(koord[0]+" "+koord[1]+" "+m.getCheckpoint()+" ");
 				if (m.getAkadaly()!=null)
-					m.getAkadaly().kiirstat();			// akadály (ha van) adatainak kiírása
+					m.getAkadaly().kiirstat(w);			// akadály (ha van) adatainak kiírása
 				if (m.getRobot()!=null){
 					int index=-1;
 					for (int n = 0;n < pm.palya.robotok.size(); n++)
@@ -93,29 +99,31 @@ public class Command {
 					for (int n = 0;n < pm.palya.kisrobotok.size(); n++)
 						if(pm.palya.kisrobotok.get(n).equals(m.getRobot()))
 							index = n;
-					m.getRobot().kiirstat(index);		// robot (ha van) index megkeresése és adatok kiírása
+					m.getRobot().kiirstat(index, w);		// robot (ha van) index megkeresése és adatok kiírása
 				}
 				System.out.println();
+				w.println();
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Egész számot írj paraméternek!");
 			}
 		}else System.out.println("Használat: KiirMezo <y> <x>");
 	}
 
-	private void kiirkisrobot(String[] cmd) { // minden kisrobotra kiírjuk az adatot
+	private void kiirkisrobot(String[] cmd, PrintWriter w) { // minden kisrobotra kiírjuk az adatot
 		ArrayList<KisRobot> kisrobotok = pm.palya.kisrobotok;
 		for(int i=0;i<kisrobotok.size();i++){
-			kisrobotok.get(i).kiirstat(i);
+			kisrobotok.get(i).kiirstat(i, w);
 			System.out.println();
+			w.println();
 		}
 	}
 
-	private void kiirrobot(String[] cmd) { // minden robotra kiírjuk az adatot
+	private void kiirrobot(String[] cmd, PrintWriter w) { // minden robotra kiírjuk az adatot
 		ArrayList<Robot> robotok = pm.palya.robotok;
 		for(int i=0;i<robotok.size();i++){
-			robotok.get(i).kiirstat(i);
+			robotok.get(i).kiirstat(i, w);
 			System.out.println();
+			w.println();
 		}
 	}
 
@@ -128,8 +136,7 @@ public class Command {
 				Mezo m = pm.palya.t.getMezo(koord);
 				m.setPalyaszakasz(false);
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Egész számot írj paraméternek!");
 			}
 		}else System.out.println("Használat: szakadek_be <y> <x>");
 	}
@@ -144,8 +151,7 @@ public class Command {
 				m.setCheckpoint(true);
 //				m.setPoziciovektor(new Vektor(0,20)); tesztelésre, amíg a mezõnek nem lesz saját
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Egész számot írj paraméternek!");
 			}
 		}else System.out.println("Használat: cp <y> <x>");
 	}
@@ -159,8 +165,7 @@ public class Command {
 				Mezo m = pm.palya.t.getMezo(koord);
 				m.setAkadaly(new Ragacs());
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Egész számot írj paraméternek!");
 			}
 		}else System.out.println("Használat: rlr <y> <x>");
 	}
@@ -170,25 +175,30 @@ public class Command {
 			try {
 				pm.palya = pm.palyaLetreHoz(Integer.parseInt(cmd[1]), Integer.parseInt(cmd[2]));
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Egész számot írj paraméternek!");
 			}
 		else System.out.println("Használat: palya <szelesseg> <magassag>");
 	}
 
-	private void kiirpalya(String[] cmd) { // kiírjuk az összes mezõ adatait
+	private void kiirpalya(String[] cmd, PrintWriter w) { // kiírjuk az összes mezõ adatait
 		Mezo[][] palya = pm.palya.t.getMezok();
 		int i = 0;
 		int j = 0;
 		for (i = 0; i<palya.length; i++){         // végigiterálunk a mezõkön
 			for(j =0; j<palya[0].length;j++){
 				System.out.print(i+" "+j+" ");
-				if (palya[i][j].getPalyaszakasz()==false) // ha szakadék, kiírjuk
+				w.print(i+" "+j+" ");
+				if (palya[i][j].getPalyaszakasz()==false){ // ha szakadék, kiírjuk
 					System.out.print("szakadek ");
-				if (palya[i][j].getCheckpoint()==true) // ha checkpoint, kiírjuk (fontos! szakadék ne legyen checkpoint!)
+					w.print("szakadek ");
+				}
+				if (palya[i][j].getCheckpoint()==true){ // ha checkpoint, kiírjuk (fontos! szakadék ne legyen checkpoint!)
 					System.out.print("checkpoint ");
-				if (palya[i][j].getAkadaly()!=null)   // ha van akadály, kiírjuk az adatait
-					palya[i][j].getAkadaly().kiirstat();
+					w.print("checkpoint ");
+				}
+				if (palya[i][j].getAkadaly()!=null){   // ha van akadály, kiírjuk az adatait
+					palya[i][j].getAkadaly().kiirstat(w);
+				}
 				if (palya[i][j].getRobot()!=null){        // ha van robot, megkeressük az indexét (a kiirstathoz), és kiírjuk
 					int index=-1;
 					for (int n = 0;n < pm.palya.robotok.size(); n++)
@@ -197,9 +207,10 @@ public class Command {
 					for (int n = 0;n < pm.palya.kisrobotok.size(); n++)
 						if(pm.palya.kisrobotok.get(n).equals(palya[i][j].getRobot())) // aztán a kisrobotok között
 							index = n;
-					palya[i][j].getRobot().kiirstat(index);
+					palya[i][j].getRobot().kiirstat(index, w);
 				}
 				System.out.println();
+				w.println();
 			}
 		}
 	}
@@ -213,8 +224,7 @@ public class Command {
 				Mezo m = pm.palya.t.getMezo(koord);
 				m.setAkadaly(new Olajfolt());
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Egész számot írj paraméternek!");
 			}
 		}else System.out.println("Használat: olr <y> <x>");
 	}
@@ -232,8 +242,7 @@ public class Command {
 					r.setMezo(m);
 				}
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Egész számot írj paraméternek!");
 			}
 		}else System.out.println("Használat: krl <y> <x>");
 	}
@@ -245,8 +254,7 @@ public class Command {
 //				int elet = Integer.parseInt(cmd[2]);
 				pm.palya.robotok.get(index).ragacsLerak();
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Egész számot írj paraméternek!");
 			}
 		}else System.out.println("Használat: robo_rlr <index>");
 	}
@@ -258,8 +266,7 @@ public class Command {
 //				int elet = Integer.parseInt(cmd[2]);
 				pm.palya.robotok.get(index).olajLerak();
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Egész számot írj paraméternek!");
 			}
 		}else System.out.println("Használat: robo_olr <index>");
 	}
@@ -271,8 +278,7 @@ public class Command {
 				Vektor v = new Vektor(Integer.parseInt(cmd[2]), Integer.parseInt(cmd[3]));
 				pm.palya.robotok.get(index).setSebessegvektor(v);
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Egész számot írj paraméternek!");
 			}
 		}else System.out.println("Használat: robo_vek <index> <y> <x>");
 	}
@@ -287,21 +293,30 @@ public class Command {
 				Mezo m = pm.palya.t.getMezo(koord);  // paraméter alapján megkeressük a mezõt
 				r.setMezo(m);                        // rátesszük a robotot
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Egész számot írj paraméternek!");
 			}
 		}else System.out.println("Használat: robo_le <index> <y> <x>");
 	}
 	
 	private void lep(String[] cmd) {  // megadott robotot léptetjük megadott vektorral (hozzáadódik a megadott vektor a robot sebességektorához)
 		if (cmd.length == 4){
+			int index = 0;
 			try {
-				int index = Integer.parseInt(cmd[1]);
+				index = Integer.parseInt(cmd[1]);
 				Vektor v = new Vektor(Integer.parseInt(cmd[2]), Integer.parseInt(cmd[3]));
 				pm.palya.robotLeptet(pm.palya.robotok.get(index), v);
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Egész számot írj paraméternek!");
+			} catch (NullPointerException e2){
+				if (pm == null)
+					System.out.println("Nem kezdtél új játékot!");
+				else if (pm.palya == null)
+					System.out.println("Nincs még pálya!");
+				else if (pm.palya.robotok.get(index) == null)
+					System.out.println("Nem elérhetõ a megadott robot!");
+				else System.out.println("NullPointer hiba!");
+			} catch (IndexOutOfBoundsException e){
+				System.out.println("Nem elérhetõ a megadott robot!");
 			}
 		}else System.out.println("Használat: lep <index> <y> <x>");
 	}
@@ -311,8 +326,9 @@ public class Command {
 			try {
 				pm.setRobotszam(Integer.parseInt(cmd[1]));
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Egész számot írj paraméternek!");
+			} catch (NullPointerException e2) {
+				System.out.println("Nem kezdtél új játékot!");
 			}
 		else System.out.println("Használat: robo_be <robotszam>");
 	}
@@ -322,15 +338,16 @@ public class Command {
 			int hanykor = 0;
 			try {
 				hanykor = Integer.parseInt(cmd[1]);
+				int vege = hanykor*pm.getRobotszam();      // ahány lépés kell: megadott szám szorozva a robotok számával,
+				Vektor uresvektor = new Vektor();          //    ekkor minden robot a megadott számszor lép,
+				for (int i=0;i<vege;i++){                  //    tehát ennyi kör eltelik
+					pm.palya.vektorFeldolgoz(uresvektor);
+					pm.korSzamol();
+				}
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			int vege = hanykor*pm.getRobotszam();      // ahány lépés kell: megadott szám szorozva a robotok számával,
-			Vektor uresvektor = new Vektor();          //    ekkor minden robot a megadott számszor lép,
-			for (int i=0;i<vege;i++){                  //    tehát ennyi kör eltelik
-				pm.palya.vektorFeldolgoz(uresvektor);
-				pm.korSzamol();
+				System.out.println("Egész számot írj paraméternek!");
+			} catch (NullPointerException e2){
+				System.out.println("Nem kezdtél új játékot, vagy nincs még pálya!");
 			}
 		}else System.out.println("Használat: kor_lep <szam>");
 	}
@@ -339,8 +356,9 @@ public class Command {
 			try {
 				pm.setKor(Integer.parseInt(cmd[1]));
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Egész számot írj paraméternek!");
+			} catch (NullPointerException e2) {
+				System.out.println("Nem kezdtél új játékot!");
 			}
 		else System.out.println("Használat: kor_be <körszám>");
 	}
@@ -349,8 +367,9 @@ public class Command {
 			try {
 				pm.setOlajkeszlet(Integer.parseInt(cmd[1]));
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Egész számot írj paraméternek!");
+			} catch (NullPointerException e2) {
+				System.out.println("Nem kezdtél új játékot!");
 			}
 		else System.out.println("Használat: olj_be <olajszám>");
 	}
@@ -359,8 +378,9 @@ public class Command {
 			try {
 				pm.setRagacskeszlet(Integer.parseInt(cmd[1]));
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Egész számot írj paraméternek!");
+			} catch (NullPointerException e2) {
+				System.out.println("Nem kezdtél új játékot!");
 			}
 		else System.out.println("Használat: rag_be <ragacsszám>");
 	}

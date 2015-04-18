@@ -1,5 +1,7 @@
 package Prototype;
 
+import java.io.PrintWriter;
+
 public class KisRobot extends Robotok {
 
 	private Vektor sebessegvektor;
@@ -119,10 +121,11 @@ public class KisRobot extends Robotok {
 		mezo.getAkadaly().eletcsokkent();
 	}
 	
-	public void kiirstat(int i) { // még nem teljesen mûködik, a mezõnek null a pozícióvektora
+	public void kiirstat(int i, PrintWriter w) { // még nem teljesen mûködik, a mezõnek null a pozícióvektora
 		int pozX=vektorAtvalt(mezo.getPoziciovektor())[0];
 		int pozY=vektorAtvalt(mezo.getPoziciovektor())[1];
 		System.out.print("kisrobot "+i+" "+pozX+" "+pozY+" "+foltonvan+" "+kiesett);
+		w.print("kisrobot "+i+" "+pozX+" "+pozY+" "+foltonvan+" "+kiesett);
 	}
 
 }

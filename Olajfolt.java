@@ -1,5 +1,7 @@
 package Prototype;
 
+import java.io.PrintWriter;
+
 public class Olajfolt extends Akadaly {
 	
 	public Olajfolt(){
@@ -25,7 +27,8 @@ public class Olajfolt extends Akadaly {
 		
 	}
 	
-	public void kiirstat() {
+	public void kiirstat(PrintWriter w) {
 		System.out.print("olaj "+elet+" "+takaritjak+" ");
+		w.print("olaj "+elet+" "+takaritjak+" ");
 	}
 }

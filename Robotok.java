@@ -1,5 +1,7 @@
 package Prototype;
 
+import java.io.PrintWriter;
+
 public abstract class Robotok {
 	protected Tarolo t; //Asszociáció miatt
 	
@@ -33,6 +35,6 @@ public abstract class Robotok {
 	 * Adatok kiíratására
 	 * @param i - robot sorszáma
 	 */
-	public abstract void kiirstat(int i);
+	public abstract void kiirstat(int i, PrintWriter w);
 
 }

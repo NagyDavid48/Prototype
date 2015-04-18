@@ -1,5 +1,7 @@
 package Prototype;
 
+import java.io.PrintWriter;
+
 public class Robot extends Robotok {
 
 	private Vektor sebessegvektor;
@@ -234,8 +236,9 @@ public class Robot extends Robotok {
 	public int getRagacs() {
 		return ragacs;
 	}
-	public void kiirstat(int i) {
+	public void kiirstat(int i, PrintWriter w) {
 		System.out.print("robot "+i+" "+olaj+" "+ragacs+" "+sebessegvektor.getX()+" "+sebessegvektor.getY()+" "+kiesett+" "+checkpoint+" "+olajonvan);
+		w.print("robot "+i+" "+olaj+" "+ragacs+" "+sebessegvektor.getX()+" "+sebessegvektor.getY()+" "+kiesett+" "+checkpoint+" "+olajonvan);
 	}
 
 }
