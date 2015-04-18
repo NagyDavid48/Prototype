@@ -2,8 +2,8 @@ package Prototype;
 
 public abstract class Akadaly {
 	
-	protected int elet;
-	protected boolean takaritjak;
+	protected int elet;//Akadaly elete
+	protected boolean takaritjak;//Takaritjak-e
 	
 	/**
 	 * Robotra hato negativ hatast ezzel lehet kivaltani (pl.: megcsuszik, lelassul, stb)
@@ -26,10 +26,19 @@ public abstract class Akadaly {
 	public abstract void oregit();
 	
 
+	/**
+	 * Az akadaly eletet adja vissza.
+	 * @return - Akadaly elete.
+	 */
 	public int getElet() {
 		return this.elet;
 	}
-
+	
+	/**
+	 * Takaritjak-e a foltot. Ha egy kis robot egy akadalyra ugrik, akkor igen.
+	 * Egyebkent nem.
+	 * @return - Takaritjak-e.
+	 */
 	public boolean getTakaritjak() {
 		return this.takaritjak;
 	}
@@ -41,4 +50,6 @@ public abstract class Akadaly {
 	public void setTakaritjak(boolean takaritjak) {
 		this.takaritjak = takaritjak;
 	}
+	
+	public void kiirstat(){}
 }

@@ -6,8 +6,8 @@ public class Keret {
 	{
 		Command cmd = new Command();
 		try{
-			while(cmd.isEnded != true)
-				cmd.fun(cmd.readCommand());
+			while(cmd.isEnded != true)                   // amíg meg nem állt a program
+				cmd.fun(cmd.readCommand());              // olvassuk a parancsokat
 		}catch(Exception e){System.out.println(e.getMessage());}
 
 	}

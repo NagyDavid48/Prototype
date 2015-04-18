@@ -8,7 +8,7 @@ public class Olajfolt extends Akadaly {
 	}
 	
 	/**
-	 * Az olajfolt nem teszi lehetove, hogy a robot a kovetkezo korben sebesseget valtson.
+	 * Az olajfolt nem teszi lehetove, hogy a robot a kovetkezo korben sebesseget modositson.
 	 * @param r - Erre a robotra hat.
 	 */
 	public void viselkedes(Robot r) {
@@ -23,5 +23,9 @@ public class Olajfolt extends Akadaly {
 	public void oregit() {
 		this.eletcsokkent();
 		
+	}
+	
+	public void kiirstat() {
+		System.out.print("olaj "+elet+" "+takaritjak+" ");
 	}
 }

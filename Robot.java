@@ -33,7 +33,10 @@ public class Robot extends Robotok {
 	public void lep(Vektor v) {				//lehet már nincs is szükség erre a visszatérési értékre
 		sebessegvektor.addVektor(v);
 		Vektor poz = mezo.getPoziciovektor();
-		Mezo mezo_c = t.getMezo(vektorAtvalt(poz));
+		//az alábbi mûveletet kiszedtem a vektorátváltból, mert így tudom kiíratni, hogy a kisrobot melyik mezõn van
+		//ráadásul az jobb, ha a vekotrátvál nevû függvény csak átváltja  a vektotr és nem csinál mást
+		Vektor pozicio = sebessegvektor.addVektor2(poz);
+		Mezo mezo_c = t.getMezo(vektorAtvalt(pozicio));
 		
 		if(mezo_c.getPalyaszakasz() == false)
 			this.kiesett = true;
@@ -76,31 +79,36 @@ public class Robot extends Robotok {
 	 * (n-1)/2-t alkalmazva a koordinatakon egy-egy 10-zel valo osztas utan kesz az index. 
 	 * @param v - Az uj sebesseg vektor.
 	 */
-	public int[] vektorAtvalt(Vektor v) {
-		Vektor pozicio = sebessegvektor.addVektor2(v);
-		pozicio.skalarOszt(10);
-		if(pozicio.getX()%2==0)
-			pozicio.setX(pozicio.getX()+1);
-		if(pozicio.getY()%2==0)
-			pozicio.setY(pozicio.getY()+1);
-		pozicio.skalarSzoroz(10);
+	public int[] vektorAtvalt(Vektor v) { // TOTO a vektorátbvált jelenleg 20-asokra kerekít, jó ez így?
+		v.skalarOszt(10);
+		if(v.getX()%2==0)
+			v.setX(v.getX()+1);
+		if(v.getY()%2==0)
+			v.setY(v.getY()+1);
+		v.skalarSzoroz(10);
 		
 		int[] tmp = new int[2];
-		tmp[0] = ((pozicio.getX()/10)-1)/2;
-		tmp[1] = ((pozicio.getY()/10)-1)/2;
+		tmp[0] = ((v.getX()/10)-1)/2;
+		tmp[1] = ((v.getY()/10)-1)/2;
 		return tmp;
 	}
 	
 	//Elvileg kész
 	public void olajLerak() {
-		Olajfolt akadaly = new Olajfolt();
-		mezo.setAkadaly(akadaly);
+		if (olaj > 0){
+			Olajfolt akadaly = new Olajfolt();
+			mezo.setAkadaly(akadaly);
+			olaj--;
+		}
 	}
 
 	//Elvileg Kész
 	public void ragacsLerak() {
-		Ragacs akadaly = new Ragacs();
-		mezo.setAkadaly(akadaly);
+		if (ragacs > 0){
+			Ragacs akadaly = new Ragacs();
+			mezo.setAkadaly(akadaly);
+			ragacs = ragacs - 1;
+		}
 	}
 
 	/**
@@ -157,6 +165,7 @@ public class Robot extends Robotok {
 	 */
 	public void setMezo(Mezo mezo) {
 		this.mezo = mezo;
+		mezo.setRobot(this);
 	}
 
 	/**
@@ -216,6 +225,17 @@ public class Robot extends Robotok {
 		tmp.skalarSzoroz(-1);//Az eredeti vektort vissza kellene allitani.
 		r.setSebessegvektor(tmp);
 		
+	}
+
+	public int getOlaj() {
+		return olaj;
+	}
+
+	public int getRagacs() {
+		return ragacs;
+	}
+	public void kiirstat(int i) {
+		System.out.print("robot "+i+" "+olaj+" "+ragacs+" "+sebessegvektor.getX()+" "+sebessegvektor.getY()+" "+kiesett+" "+checkpoint+" "+olajonvan);
 	}
 
 }

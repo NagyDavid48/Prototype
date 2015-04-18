@@ -1,7 +1,5 @@
 package Prototype;
 
-//dgavsfvausvfabshufasuchbaiycbiudasbucbuahfvuzqeavufzsaiuhfiuasuzcauzfghasdiahsiucuazgfuzqagsiuf
-
 public class Tarolo {
 
 	private Mezo[][] mezok;
@@ -16,7 +14,7 @@ public class Tarolo {
 		
 		for(int i = 0 ; i<magassag; i++)
 			for(int j = 0 ; j<szelesseg; j++){
-				tmp[i][j] = new Mezo(false, false, null, null, null);	
+				tmp[i][j] = new Mezo(false, true, null, null, null);	
 			}
 		
 		mezok = tmp;
@@ -33,10 +31,6 @@ public class Tarolo {
 	public Mezo getMezo(int[] koordinata) {
 		return mezok[koordinata[0]][koordinata[1]];
 	}
-	
-	public void probafuggveny(){
-	// git tesztelésére
-	}
-	
+		
 
 }

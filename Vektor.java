@@ -24,7 +24,7 @@ public class Vektor {
 	}
 	
 	/**
-	 * A HIVO VEKTORHOZ ADDJA HOZZA a masik Vektor koordinatait.
+	 * A HIVO VEKTORHOZ ADJA HOZZA a masik Vektor koordinatait.
 	 * @param v - Masik vektor.
 	 */
 	public void addVektor(Vektor v){
@@ -61,7 +61,7 @@ public class Vektor {
 	
 	/**
 	 * Egy skalárral osztja a koordinatakat. 
-	 * Egesz osztast vegezz! (/) Nem kerekit! 3/2 = 1!!!
+	 * Egesz osztast vegezz! (/) Nem kerekit!
 	 * @param skalar - A szam, mivel oszt.
 	 */
 	public void skalarOszt(int skalar){
