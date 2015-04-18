@@ -38,7 +38,9 @@ public class Robot extends Robotok {
 		//az alábbi mûveletet kiszedtem a vektorátváltból, mert így tudom kiíratni, hogy a kisrobot melyik mezõn van
 		//ráadásul az jobb, ha a vekotrátvál nevû függvény csak átváltja  a vektotr és nem csinál mást
 		Vektor pozicio = sebessegvektor.addVektor2(poz);
-		Mezo mezo_c = t.getMezo(vektorAtvalt(pozicio));
+		Mezo mezo_c = Tarolo.getMezo(vektorAtvalt(pozicio));
+		
+		this.mezo.setRobot(null);
 		
 		if(mezo_c.getPalyaszakasz() == false)
 			this.kiesett = true;
@@ -69,8 +71,10 @@ public class Robot extends Robotok {
 			mezo_c.setCheckpoint(false);
 		}
 		
-		if(this.kiesett == false)
-			this.mezo = mezo_c;
+		if(this.kiesett == false){
+			setMezo(mezo_c);
+		}
+			
 	}
 
 	/**
@@ -167,7 +171,8 @@ public class Robot extends Robotok {
 	 */
 	public void setMezo(Mezo mezo) {
 		this.mezo = mezo;
-		mezo.setRobot(this);
+		if(mezo != null)
+			mezo.setRobot(this);
 	}
 
 	/**

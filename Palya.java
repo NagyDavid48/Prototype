@@ -47,13 +47,17 @@ public class Palya {
 	//elvileg kész
 	public void vektorFeldolgoz(Vektor v) {
 		robotLeptet(robotok.get(soronlevo),v);
-		if(soronlevo++ == robotok.size() && kisrobotok.size() != 0){
-			int i = 0;
-			while(i<kisrobotok.size())
-			{
-				kisrobotLeptet(kisrobotok.get(i),v);
-				i++;
+		if(soronlevo++ == robotok.size()){
+			soronlevo = 0;
+			if (kisrobotok.size() != 0){
+				int i = 0;
+				while(i<kisrobotok.size())
+				{
+					kisrobotLeptet(kisrobotok.get(i),v);
+					i++;
+				}
 			}
+			
 		}	
 	}
 

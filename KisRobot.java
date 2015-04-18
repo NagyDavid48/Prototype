@@ -49,7 +49,7 @@ public class KisRobot extends Robotok {
 		this.setSebessegvektor(v);
 		Vektor poz = mezo.getPoziciovektor();
 		Vektor pozicio = sebessegvektor.addVektor2(poz);		
-		Mezo mezo_c = t.getMezo(vektorAtvalt(pozicio));
+		Mezo mezo_c = Tarolo.getMezo(vektorAtvalt(pozicio));
 		
 		if(mezo_c.getPalyaszakasz()==true && mezo_c.getAkadaly()==null && mezo_c.getRobot()==null){
 			
