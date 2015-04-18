@@ -1,7 +1,5 @@
 package Prototype;
 
-//dgavsfvausvfabshufasuchbaiycbiudasbucbuahfvuzqeavufzsaiuhfiuasuzcauzfghasdiahsiucuazgfuzqagsiuf
-
 public class Tarolo {
 
 	private Mezo[][] mezok;

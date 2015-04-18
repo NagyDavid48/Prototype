@@ -52,6 +52,7 @@ public class Palya {
 			while(i<kisrobotok.size())
 			{
 				kisrobotLeptet(kisrobotok.get(i),v);
+				i++;
 			}
 		}	
 	}
