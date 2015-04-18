@@ -108,6 +108,11 @@ public class Palya_Menedzser {
 		this.robotszam = robotszam;
 	}
 	
+	/**
+	 * Vissza adja a jatekban resztvevo robotok szamat.
+	 * Kis robotok szamat nem adja vissza.
+	 * @return - Robotok szama
+	 */
 	public int getRobotszam() {
 		return robotszam;
 	}
