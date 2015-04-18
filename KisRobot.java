@@ -44,7 +44,20 @@ public class KisRobot extends Robotok {
 	 */
 	public void lep(Vektor v) {
 		// TODO - implement KisRobot.lep
-		throw new UnsupportedOperationException();
+		
+		///Ide kéne a magic algortimus
+		
+		
+		
+		/////////////////////////////////
+		sebessegvektor.addVektor(v);
+		Vektor poz = mezo.getPoziciovektor();
+		Mezo mezo_c = t.getMezo(vektorAtvalt(poz));
+		
+		if(mezo_c.getPalyaszakasz()==true && mezo_c.getAkadaly()==null && mezo_c.getRobot()==null){
+			
+		}
+		
 	}
 
 	public Mezo getMezo() {
@@ -112,8 +125,8 @@ public class KisRobot extends Robotok {
 		if(mezo.getAkadaly().getElet()==0){
 				mezo.setAkadaly(null);
 				this.setFoltonvan(false);
-		}
-		mezo.getAkadaly().eletcsokkent();
+		}else 
+			mezo.getAkadaly().eletcsokkent();
 	}
 
 }
