@@ -32,7 +32,7 @@ public class Command {
 			kor_lep(cmd);
 		else if (cmd[0].equals("robo_be")) // robotok számát beállítja
 			robo_be(cmd);
-		else if (cmd[0].equals("lep")) // robotot léptet
+		else if (cmd[0].equals("lep")) 	   // robotot léptet
 			lep(cmd);
 		else if (cmd[0].equals("robo_le")) // robotot lerak
 			robo_le(cmd);

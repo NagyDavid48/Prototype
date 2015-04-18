@@ -20,9 +20,9 @@ public class Keret {
 		if (args.length == 1)
 			infile = args[0];
 		try{
-			reader = new BufferedReader(new FileReader(infile));
+			reader = new BufferedReader(new FileReader(infile));		// ha volt argumentum, onnan olvasunk
 		} catch(Exception e){
-			reader = new BufferedReader(new InputStreamReader(System.in));
+			reader = new BufferedReader(new InputStreamReader(System.in)); // ha nem létezik a bemeneti fájl, vagy nincs argumentum, konzolról olvasunk
 		}
 		try{
 			writer=new PrintWriter(new FileWriter(outfile));
@@ -30,7 +30,7 @@ public class Keret {
 				cmd.fun(cmd.readCommand(reader), writer);               // olvassuk a parancsokat
 			reader.close();
 			writer.close();
-		}catch(Exception e){/*System.out.println(e.getMessage())*/e.printStackTrace();}
+		}catch(Exception e){e.printStackTrace();}
 
 	}
 	
