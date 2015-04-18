@@ -44,27 +44,20 @@ public class KisRobot extends Robotok {
 	 */
 	public void lep(Vektor v) {
 		// TODO - implement KisRobot.lep
-<<<<<<< HEAD
-		
-		///Ide kéne a magic algortimus
-		
-		
-		
-		/////////////////////////////////
-		sebessegvektor.addVektor(v);
+		this.setSebessegvektor(v);
 		Vektor poz = mezo.getPoziciovektor();
-		Mezo mezo_c = t.getMezo(vektorAtvalt(poz));
+		Vektor pozicio = sebessegvektor.addVektor2(poz);		
+		Mezo mezo_c = t.getMezo(vektorAtvalt(pozicio));
 		
 		if(mezo_c.getPalyaszakasz()==true && mezo_c.getAkadaly()==null && mezo_c.getRobot()==null){
 			
 		}
 		
-=======
+
 		//az alábbi mûveletet kiszedtem a vektorátváltból, mert így tudom kiíratni, hogy a kisrobot melyik mezõn van
 		//ráadásul az jobb, ha a vekotrátvál nevû függvény csak átváltja  a vektotr és nem csinál mást
-//		Vektor pozicio = sebessegvektor.addVektor2(pos);
+		
 		throw new UnsupportedOperationException();
->>>>>>> 648e74ff9e34c737ea72845234afd4516b7a583a
 	}
 
 	public Mezo getMezo() {
