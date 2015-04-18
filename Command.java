@@ -10,6 +10,7 @@ public class Command {
 	protected boolean isEnded = false;                                   // ezt állítjuk be, ha megállt a program
 	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	public String[] readCommand() throws IOException {
+		System.out.print("> ");
 		return reader.readLine().split(" ");                             // space-ek mentén daraboljuk a beírt parancsot
 	}
 	/**
@@ -75,24 +76,31 @@ public class Command {
 	}
 
 	private void kiirmezo(String[] cmd) {
-		int[] koord = new int[2];				//
-		koord[0] = Integer.parseInt(cmd[1]);	//
-		koord[1] = Integer.parseInt(cmd[2]);	//
-		Mezo m = pm.palya.t.getMezo(koord);		// a megadott koordinátából meghatározzuk a mezõt
-		System.out.print(koord[0]+" "+koord[1]+" "+m.getCheckpoint()+" "); //kiírjuk a koordinátát + hogy checkpoint-e
-		if (m.getAkadaly()!=null)
-			m.getAkadaly().kiirstat();			// akadály (ha van) adatainak kiírása
-		if (m.getRobot()!=null){
-			int index=-1;
-			for (int n = 0;n < pm.palya.robotok.size(); n++)
-				if(pm.palya.robotok.get(n).equals(m.getRobot()))
-					index = n;
-			for (int n = 0;n < pm.palya.kisrobotok.size(); n++)
-				if(pm.palya.kisrobotok.get(n).equals(m.getRobot()))
-					index = n;
-			m.getRobot().kiirstat(index);		// robot (ha van) index megkeresése és adatok kiírása
-		}
-		System.out.println();
+		if (cmd.length == 3){
+			int[] koord = new int[2];				//
+			try {
+				koord[0] = Integer.parseInt(cmd[1]);	//
+				koord[1] = Integer.parseInt(cmd[2]);	//
+				Mezo m = pm.palya.t.getMezo(koord);		// a megadott koordinátából meghatározzuk a mezõt
+				System.out.print(koord[0]+" "+koord[1]+" "+m.getCheckpoint()+" "); //kiírjuk a koordinátát + hogy checkpoint-e
+				if (m.getAkadaly()!=null)
+					m.getAkadaly().kiirstat();			// akadály (ha van) adatainak kiírása
+				if (m.getRobot()!=null){
+					int index=-1;
+					for (int n = 0;n < pm.palya.robotok.size(); n++)
+						if(pm.palya.robotok.get(n).equals(m.getRobot()))
+							index = n;
+					for (int n = 0;n < pm.palya.kisrobotok.size(); n++)
+						if(pm.palya.kisrobotok.get(n).equals(m.getRobot()))
+							index = n;
+					m.getRobot().kiirstat(index);		// robot (ha van) index megkeresése és adatok kiírása
+				}
+				System.out.println();
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else System.out.println("Használat: KiirMezo <y> <x>");
 	}
 
 	private void kiirkisrobot(String[] cmd) { // minden kisrobotra kiírjuk az adatot
@@ -112,32 +120,60 @@ public class Command {
 	}
 
 	private void szakadek_be(String[] cmd) { // paraméterbõl megkeressük a mezõt, beállítjuk szakadéknak
-		int[] koord = new int[2];
-		koord[0] = Integer.parseInt(cmd[1]);
-		koord[1] = Integer.parseInt(cmd[2]);
-		Mezo m = pm.palya.t.getMezo(koord);
-		m.setPalyaszakasz(false);
+		if (cmd.length == 3){
+			int[] koord = new int[2];
+			try {
+				koord[0] = Integer.parseInt(cmd[1]);
+				koord[1] = Integer.parseInt(cmd[2]);
+				Mezo m = pm.palya.t.getMezo(koord);
+				m.setPalyaszakasz(false);
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else System.out.println("Használat: szakadek_be <y> <x>");
 	}
 
 	private void cp(String[] cmd) { // paraméterbõl megkeressük a mezõt, beállítjuk checkpointnak
-		int[] koord = new int[2];
-		koord[0] = Integer.parseInt(cmd[1]);
-		koord[1] = Integer.parseInt(cmd[2]);
-		Mezo m = pm.palya.t.getMezo(koord);
-		m.setCheckpoint(true);
-//		m.setPoziciovektor(new Vektor(0,20)); tesztelésre, amíg a mezõnek nem lesz saját
+		if (cmd.length == 3){
+			int[] koord = new int[2];
+			try {
+				koord[0] = Integer.parseInt(cmd[1]);
+				koord[1] = Integer.parseInt(cmd[2]);
+				Mezo m = pm.palya.t.getMezo(koord);
+				m.setCheckpoint(true);
+//				m.setPoziciovektor(new Vektor(0,20)); tesztelésre, amíg a mezõnek nem lesz saját
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else System.out.println("Használat: cp <y> <x>");
 	}
 
 	private void rlr(String[] cmd) { // paraméterbõl megkeressük a mezõt, ragacsot rakunk rá
-		int[] koord = new int[2];
-		koord[0] = Integer.parseInt(cmd[1]);
-		koord[1] = Integer.parseInt(cmd[2]);
-		Mezo m = pm.palya.t.getMezo(koord);
-		m.setAkadaly(new Ragacs());
+		if (cmd.length == 3){
+			int[] koord = new int[2];
+			try {
+				koord[0] = Integer.parseInt(cmd[1]);
+				koord[1] = Integer.parseInt(cmd[2]);
+				Mezo m = pm.palya.t.getMezo(koord);
+				m.setAkadaly(new Ragacs());
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else System.out.println("Használat: rlr <y> <x>");
 	}
 
 	private void palya(String[] cmd) { // létrehozunk egy paramétereknek megfelelõ pályát
-		pm.palya = pm.palyaLetreHoz(Integer.parseInt(cmd[1]), Integer.parseInt(cmd[2]));
+		if (cmd.length == 3)
+			try {
+				pm.palya = pm.palyaLetreHoz(Integer.parseInt(cmd[1]), Integer.parseInt(cmd[2]));
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		else System.out.println("Használat: palya <szelesseg> <magassag>");
 	}
 
 	private void kiirpalya(String[] cmd) { // kiírjuk az összes mezõ adatait
@@ -169,79 +205,164 @@ public class Command {
 	}
 
 	private void olr(String[] cmd) { // paraméterbõl megkeressük a mezõt, olajat rakunk rá
-		int[] koord = new int[2];
-		koord[0] = Integer.parseInt(cmd[1]);
-		koord[1] = Integer.parseInt(cmd[2]);
-		Mezo m = pm.palya.t.getMezo(koord);
-		m.setAkadaly(new Olajfolt());
+		if (cmd.length == 3){
+			int[] koord = new int[2];
+			try {
+				koord[0] = Integer.parseInt(cmd[1]);
+				koord[1] = Integer.parseInt(cmd[2]);
+				Mezo m = pm.palya.t.getMezo(koord);
+				m.setAkadaly(new Olajfolt());
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else System.out.println("Használat: olr <y> <x>");
 	}
 
 	private void krl(String[] cmd) {
-		KisRobot r = new KisRobot();  // új kisrobotot hozunk létre
-		pm.palya.kisrobotok.add(r);
-		int[] koord = new int[2];
-		koord[0] = Integer.parseInt(cmd[1]); // paraméterbõl megkeressük a mezõt
-		koord[1] = Integer.parseInt(cmd[2]);
-		Mezo m = pm.palya.t.getMezo(koord);
-		if (m.getRobot() == null){           // kisrobot mezõjét beállítjuk
-			r.setMezo(m);
-		}
+		if (cmd.length == 3){
+			KisRobot r = new KisRobot();  // új kisrobotot hozunk létre
+			pm.palya.kisrobotok.add(r);
+			int[] koord = new int[2];
+			try {
+				koord[0] = Integer.parseInt(cmd[1]); // paraméterbõl megkeressük a mezõt
+				koord[1] = Integer.parseInt(cmd[2]);
+				Mezo m = pm.palya.t.getMezo(koord);
+				if (m.getRobot() == null){           // kisrobot mezõjét beállítjuk
+					r.setMezo(m);
+				}
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else System.out.println("Használat: krl <y> <x>");
 	}
 
 	private void robo_rlr(String[] cmd) {     // a megadott robotnak meghívjuk a ragacslerak függvényét
-		int index = Integer.parseInt(cmd[1]);
-//		int elet = Integer.parseInt(cmd[2]);
-		pm.palya.robotok.get(index).ragacsLerak();
+		if (cmd.length == 3){
+			try {
+				int index = Integer.parseInt(cmd[1]);
+//				int elet = Integer.parseInt(cmd[2]);
+				pm.palya.robotok.get(index).ragacsLerak();
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else System.out.println("Használat: robo_rlr <index>");
 	}
 
 	private void robo_olr(String[] cmd) {    // a megadott robotnak meghívjuk az olajlerak függvényét
-		int index = Integer.parseInt(cmd[1]);
-//		int elet = Integer.parseInt(cmd[2]);
-		pm.palya.robotok.get(index).olajLerak();
+		if (cmd.length == 3){
+			try {
+				int index = Integer.parseInt(cmd[1]);
+//				int elet = Integer.parseInt(cmd[2]);
+				pm.palya.robotok.get(index).olajLerak();
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else System.out.println("Használat: robo_olr <index>");
 	}
 
 	private void robo_vek(String[] cmd) {    // a megadott robotnak paraméterek szerinti sebességvektort állítunk be
-		int index = Integer.parseInt(cmd[1]);
-		Vektor v = new Vektor(Integer.parseInt(cmd[2]), Integer.parseInt(cmd[3]));
-		pm.palya.robotok.get(index).setSebessegvektor(v);
+		if (cmd.length == 4){
+			try {
+				int index = Integer.parseInt(cmd[1]);
+				Vektor v = new Vektor(Integer.parseInt(cmd[2]), Integer.parseInt(cmd[3]));
+				pm.palya.robotok.get(index).setSebessegvektor(v);
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else System.out.println("Használat: robo_vek <index> <y> <x>");
 	}
 
 	private void robo_le(String[] cmd) {    // a megadott robotot lerakjuk a paraméter mezõre
-		int[] koord = new int[2];
-		Robot r = pm.palya.robotok.get(Integer.parseInt(cmd[1]));
-		koord[0] = Integer.parseInt(cmd[2]);
-		koord[1] = Integer.parseInt(cmd[3]);
-		Mezo m = pm.palya.t.getMezo(koord);  // paraméter alapján megkeressük a mezõt
-		r.setMezo(m);                        // rátesszük a robotot
+		if (cmd.length == 4){
+			try {
+				int[] koord = new int[2];
+				Robot r = pm.palya.robotok.get(Integer.parseInt(cmd[1]));
+				koord[0] = Integer.parseInt(cmd[2]);
+				koord[1] = Integer.parseInt(cmd[3]);
+				Mezo m = pm.palya.t.getMezo(koord);  // paraméter alapján megkeressük a mezõt
+				r.setMezo(m);                        // rátesszük a robotot
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else System.out.println("Használat: robo_le <index> <y> <x>");
 	}
 	
-	private void lep(String[] cmd) {  // megadott robotot léptetjük megadott vektorral (hozzáadódik a megydott vektor a robot sebességektorához)
-		int index = Integer.parseInt(cmd[1]);
-		Vektor v = new Vektor(Integer.parseInt(cmd[2]), Integer.parseInt(cmd[3]));
-		pm.palya.robotLeptet(pm.palya.robotok.get(index), v);
+	private void lep(String[] cmd) {  // megadott robotot léptetjük megadott vektorral (hozzáadódik a megadott vektor a robot sebességektorához)
+		if (cmd.length == 4){
+			try {
+				int index = Integer.parseInt(cmd[1]);
+				Vektor v = new Vektor(Integer.parseInt(cmd[2]), Integer.parseInt(cmd[3]));
+				pm.palya.robotLeptet(pm.palya.robotok.get(index), v);
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else System.out.println("Használat: lep <index> <y> <x>");
 	}
 	
 	private void robo_be(String[] cmd) {            // játék indításakor beállítjuk a játékosok számát
-		pm.setRobotszam(Integer.parseInt(cmd[1]));
+		if (cmd.length == 2)
+			try {
+				pm.setRobotszam(Integer.parseInt(cmd[1]));
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		else System.out.println("Használat: robo_be <robotszam>");
 	}
 	
 	private void kor_lep(String[] cmd) {           // ennyi kör eltelik a játékban
-		int hanykor = Integer.parseInt(cmd[1]);    // kívánt körök száma
-		int vege = hanykor*pm.getRobotszam();      // ahány lépés kell: megadott szám szorozva a robotok számával,
-		Vektor uresvektor = new Vektor();          //    ekkor minden robot a megadott számszor lép,
-		for (int i=0;i<vege;i++){                  //    tehát ennyi kör eltelik
-			pm.palya.vektorFeldolgoz(uresvektor);
-			pm.korSzamol();
-		}
+		if (cmd.length == 2){
+			int hanykor = 0;
+			try {
+				hanykor = Integer.parseInt(cmd[1]);
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			int vege = hanykor*pm.getRobotszam();      // ahány lépés kell: megadott szám szorozva a robotok számával,
+			Vektor uresvektor = new Vektor();          //    ekkor minden robot a megadott számszor lép,
+			for (int i=0;i<vege;i++){                  //    tehát ennyi kör eltelik
+				pm.palya.vektorFeldolgoz(uresvektor);
+				pm.korSzamol();
+			}
+		}else System.out.println("Használat: kor_lep <szam>");
 	}
 	private void kor_be(String[] cmd) {       // játék indításakor beállítjuk a körök számát
-		pm.setKor(Integer.parseInt(cmd[1]));
+		if (cmd.length == 2)
+			try {
+				pm.setKor(Integer.parseInt(cmd[1]));
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		else System.out.println("Használat: kor_be <körszám>");
 	}
 	private void olj_be(String[] cmd) {      // játék indításakor beállítjuk a robotok olajkészletét
-		pm.setOlajkeszlet(Integer.parseInt(cmd[1]));
+		if (cmd.length == 2)
+			try {
+				pm.setOlajkeszlet(Integer.parseInt(cmd[1]));
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		else System.out.println("Használat: olj_be <olajszám>");
 	}
 	private void rag_be(String[] cmd) {       // játék indításakor beállítjuk a robotok ragacskészletét
-		pm.setRagacskeszlet(Integer.parseInt(cmd[1]));
+		if (cmd.length == 2)
+			try {
+				pm.setRagacskeszlet(Integer.parseInt(cmd[1]));
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		else System.out.println("Használat: rag_be <ragacsszám>");
 	}
 	private void uj_jatek(String[] cmd) {     // új, üres pályamenedzsert indítunk
 		pm = new Palya_Menedzser();
