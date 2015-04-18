@@ -2,11 +2,14 @@ package Prototype;
 
 public class Palya_Menedzser {
 
-	private int kor;//Ennyi a max korok szama
-	private int olajkeszlet;//Ennyi olaja lesz egy robotnak
-	private int ragacskeszlet;//Ennyi ragacsa lesz egy robotnak
-	public Palya palya;//A keret el tudja hívni a pálya fv-it. PM.palya.elmennek.aPicsaba();
-	private int robotszam;//Ennyi robot lesz a pályán
+	private int kor = 10;//Ennyi a max korok szama
+	private int olajkeszlet = 0;//Ennyi olaja lesz egy robotnak
+	private int ragacskeszlet = 0;//Ennyi ragacsa lesz egy robotnak
+	public Palya palya;//A keret el tudja hívni a pálya fv-it.
+	private int robotszam = 0;//Ennyi robot lesz a pályán
+	private int robocntr=0; //Ennyi robot lépett a körben
+	
+
 	private boolean isVege = false;
 
 	/**
@@ -23,13 +26,18 @@ public class Palya_Menedzser {
 		this.ragacskeszlet = ragacs;
 		this.olajkeszlet = olaj;
 		this.robotszam = robotszam;
-		//this.robocntr = 0;
-		this.palya = new Palya(szelesseg, magassag, robotszam, olaj, ragacs);
+		this.robocntr = 0;
+		this.palya = palyaLetreHoz(szelesseg, magassag);
 	}
 	
 	
 
 	public Palya_Menedzser(){}
+	
+	
+	public Palya palyaLetreHoz(int szelesseg, int magassag){
+		return new Palya(szelesseg, magassag, robotszam, olajkeszlet, ragacskeszlet);
+	}
 	
 	//Valahogy meg kell oldani az inputok feldolgozasat. - Megbeszeles.
 	
@@ -42,16 +50,20 @@ public class Palya_Menedzser {
 	 */
 	public void korSzamol() {
 		if(!isVege){//Ha nincs vege a jateknak.
-			kor--;
-			if(kor>0){//Megy a jatek
-				if(kor % 3 == 0)//Minden negyedik kor vegen kiosztjuk a cp-ket.
-					palya.cpKioszt();
-				if(kor%5==0)//Lasd szekvencia
-					palya.kisrobotLetrehoz();//Release the MiniRobots!
-				palya.oregit();//Olaj szaradasa
-			}else{//Itt van vege a jateknak.
-				palya.gyoztesValaszt();
-				isVege = true;
+			robocntr++;
+			if (robocntr == robotszam) // ha minden robot lépett
+			{
+				kor--;
+				if(kor>0){//Megy a jatek
+					if(kor % 3 == 0)//Minden negyedik kor vegen kiosztjuk a cp-ket.
+						palya.cpKioszt();
+					if(kor%5==0)//Lasd szekvencia
+						palya.kisrobotLetrehoz();//Release the MiniRobots!
+					palya.oregit();//Olaj szaradasa
+				}else{//Itt van vege a jateknak.
+					palya.gyoztesValaszt();
+					isVege = true;
+				}
 			}
 		}
 	}
@@ -94,5 +106,9 @@ public class Palya_Menedzser {
 	 */
 	public void setRobotszam(int robotszam) {
 		this.robotszam = robotszam;
+	}
+	
+	public int getRobotszam() {
+		return robotszam;
 	}
 }

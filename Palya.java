@@ -139,15 +139,20 @@ public class Palya {
 		r.ragacsLerak();
 	}
 
-	public void gyoztesValaszt() {
+	public int gyoztesValaszt() {
 		int i = 1;
-		Robot nyertes = robotok.get(0);
+		int nyero = 0;
+		Robot nyertes = robotok.get(nyero);
 		while(i<robotok.size())
 		{
-			if(robotok.get(i).getCheckpoint() > nyertes.getCheckpoint())
+			if(robotok.get(i).getCheckpoint() > nyertes.getCheckpoint()){
 				nyertes = robotok.get(i);
+				nyero = i;
+			}
+			i++;
 		}
 		// ide gondolom jönne még egy kiirás lehet kellene visszatérési érték a protohoz
+		return nyero;
 		
 	}
 

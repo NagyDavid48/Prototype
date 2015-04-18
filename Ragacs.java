@@ -23,5 +23,9 @@ public class Ragacs extends Akadaly {
 	public void oregit() {
 		//Ido nem hat ra!
 	}
+	
+	public void kiirstat() {
+		System.out.print("ragacs "+elet+" "+takaritjak+" ");
+	}
 
 }

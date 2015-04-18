@@ -44,6 +44,9 @@ public class KisRobot extends Robotok {
 	 */
 	public void lep(Vektor v) {
 		// TODO - implement KisRobot.lep
+		//az alábbi mûveletet kiszedtem a vektorátváltból, mert így tudom kiíratni, hogy a kisrobot melyik mezõn van
+		//ráadásul az jobb, ha a vekotrátvál nevû függvény csak átváltja  a vektotr és nem csinál mást
+//		Vektor pozicio = sebessegvektor.addVektor2(pos);
 		throw new UnsupportedOperationException();
 	}
 
@@ -57,6 +60,7 @@ public class KisRobot extends Robotok {
 	 */
 	public void setMezo(Mezo mezo) {
 		this.mezo = mezo;
+		mezo.setRobot(this);
 	}
 
 	public Vektor getSebessegvektor() {
@@ -76,17 +80,16 @@ public class KisRobot extends Robotok {
 	 * @param v
 	 */
 	public int[] vektorAtvalt(Vektor v) {
-		Vektor pozicio = sebessegvektor.addVektor2(v);
-		pozicio.skalarOszt(10);
-		if(pozicio.getX()%2==0)
-			pozicio.setX(pozicio.getX()+1);
-		if(pozicio.getY()%2==0)
-			pozicio.setY(pozicio.getY()+1);
-		pozicio.skalarSzoroz(10);
+		v.skalarOszt(10);
+		if(v.getX()%2==0)
+			v.setX(v.getX()+1);
+		if(v.getY()%2==0)
+			v.setY(v.getY()+1);
+		v.skalarSzoroz(10);
 		
 		int[] tmp = new int[2];
-		tmp[0] = ((pozicio.getX()/10)-1)/2;
-		tmp[1] = ((pozicio.getY()/10)-1)/2;
+		tmp[0] = ((v.getX()/10)-1)/2;
+		tmp[1] = ((v.getY()/10)-1)/2;
 		return tmp;
 	}
 
@@ -114,6 +117,12 @@ public class KisRobot extends Robotok {
 				this.setFoltonvan(false);
 		}
 		mezo.getAkadaly().eletcsokkent();
+	}
+	
+	public void kiirstat(int i) { // még nem teljesen mûködik, a mezõnek null a pozícióvektora
+		int pozX=vektorAtvalt(mezo.getPoziciovektor())[0];
+		int pozY=vektorAtvalt(mezo.getPoziciovektor())[1];
+		System.out.print("kisrobot "+i+" "+pozX+" "+pozY+" "+foltonvan+" "+kiesett);
 	}
 
 }

@@ -41,4 +41,6 @@ public abstract class Akadaly {
 	public void setTakaritjak(boolean takaritjak) {
 		this.takaritjak = takaritjak;
 	}
+	
+	public void kiirstat(){}
 }

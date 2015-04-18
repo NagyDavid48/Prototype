@@ -28,5 +28,11 @@ public abstract class Robotok {
 	 * @param r - Ugro kis robot.
 	 */
 	public abstract void utkozes(KisRobot r);
+	
+	/**
+	 * Adatok kiíratására
+	 * @param i - robot sorszáma
+	 */
+	public abstract void kiirstat(int i);
 
 }

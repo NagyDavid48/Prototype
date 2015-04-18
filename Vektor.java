@@ -24,7 +24,7 @@ public class Vektor {
 	}
 	
 	/**
-	 * A HIVO VEKTORHOZ ADDJA HOZZA a masik Vektor koordinatait.
+	 * A HIVO VEKTORHOZ ADJA HOZZA a masik Vektor koordinatait.
 	 * @param v - Masik vektor.
 	 */
 	public void addVektor(Vektor v){

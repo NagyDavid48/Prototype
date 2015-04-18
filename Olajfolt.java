@@ -24,4 +24,8 @@ public class Olajfolt extends Akadaly {
 		this.eletcsokkent();
 		
 	}
+	
+	public void kiirstat() {
+		System.out.print("olaj "+elet+" "+takaritjak+" ");
+	}
 }
