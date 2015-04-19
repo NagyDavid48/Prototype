@@ -61,12 +61,10 @@ public class Robot extends Robotok {
 			
 			if(mezo_c.getAkadaly() != null && this.kiesett == false){
 				Akadaly a = mezo_c.getAkadaly();
+				a.viselkedes(this);
 				int elet = a.getElet();
-					if(elet == 0){
+					if(elet == 0)
 						mezo_c.setAkadaly(null);
-					}else{
-						a.viselkedes(this);
-					}
 			}
 			
 			if(mezo_c.getCheckpoint() == true && this.kiesett == false){
