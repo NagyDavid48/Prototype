@@ -275,25 +275,27 @@ public class Palya {
 		
 	}
 
-	//elvileg kész
+	/**
+	 * Az olajfoltot oregitjuk ezzel. Minden korben eggyel csokken az olajfolt elete, ha nincs rajta kis robot, akkor kettovel.
+	 */
 	public void oregit() {
-		Mezo[][] m = t.getMezok();
+		Mezo[][] m = t.getMezok();//Lekérdezzük a vilagot
 		int elet;
 		int k = 0;
-		for(int i = 0; i<magassag; i++){
-			for(int j = 0; j<szelesseg; j++){
-				if(m[i][j].getAkadaly() != null){
-					m[i][j].getAkadaly().oregit();
+		for(int i = 0; i<magassag; i++){//Hosszaban
+			for(int j = 0; j<szelesseg; j++){//Szelteben
+				if(m[i][j].getAkadaly() != null){//Ha van akadaly az adott mezon
+					m[i][j].getAkadaly().oregit();//Szimplan oregitjuk
 					elet = m[i][j].getAkadaly().getElet();
-					if(elet==0){
-						m[i][j].setAkadaly(null);
-						while (k<kisrobotok.size()){
-							if(m[i][j] == kisrobotok.get(i).getMezo())
-								kisrobotok.get(i).setFoltonvan(false);
+					if(elet==0){//Ha vege van
+						m[i][j].setAkadaly(null);//Akkor eltuntejuk
+						while (k<kisrobotok.size()){//Vegig megyunk a kisrobotok tombjen
+							if(m[i][j] == kisrobotok.get(k).getMezo())//Ha az akadaly helyen van kisrobot
+								kisrobotok.get(k).setFoltonvan(false);//Akkor ezt megszüntetjuk
 							k++;
 						}
 					}
-				}
+				}//Ha nincs, akkor nem csinalunk semmit.
 			}
 		}
 	}
