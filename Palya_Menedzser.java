@@ -74,6 +74,7 @@ public class Palya_Menedzser {
 				}
 			}
 		}*/
+		palya.oregit();
 	}
 
 	/**
