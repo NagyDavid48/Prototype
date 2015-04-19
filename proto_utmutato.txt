@@ -1,23 +1,24 @@
-Phoebe Prototype Kezelési útmutató
+Phoebe Prototype KezelÃ©si ÃºtmutatÃ³
 
-A parancsok a 7-es doksiban vannak, ezek majdnem tökéletesen ugyanúgy mûködnek, egy változtatás,
-hogy az akadálylerakásoknál nem lehet életet megadni (az alapértelmezésben 4), valamint a krl-nál nem kell kisrobot index, csak mezõ.
+A parancsok a 7-es doksiban vannak, ezek majdnem tÃ¶kÃ©letesen ugyanÃºgy mÅ±kÃ¶dnek, egy vÃ¡ltoztatÃ¡s,
+hogy az akadÃ¡lylerakÃ¡soknÃ¡l nem lehet Ã©letet megadni (az alapÃ©rtelmezÃ©sben 4), valamint a krl-nÃ¡l nem kell kisrobot index, csak mezÅ‘.
 
-Az elsõ parancs mindenképp uj_jatek, ez inicializálja a pályamenedzsert.
-ezután a robo_be, rag_be, olj_be, kor_be parancsokkal konfigurálhatjuk a pályát,
-amit a palya paranccsal hozhatunk létre. Ha nem állítottunk be elõtte pl robotot, akkor nem lehet majd robotot lerakni a pályára!
-az alapértelmezés sorrendben: 0, 0, 0, 10. (lehet érdemesebb lenne az egyszerûség kedvéért más számokat alapértelmezésbe állítani)
+Az elsÅ‘ parancs mindenkÃ©pp uj_jatek, ez inicializÃ¡lja a pÃ¡lyamenedzsert.
+ezutÃ¡n a robo_be, rag_be, olj_be, kor_be parancsokkal konfigurÃ¡lhatjuk a pÃ¡lyÃ¡t,
+amit a palya paranccsal hozhatunk lÃ©tre. Ha nem Ã¡llÃ­tottunk be elÅ‘tte pl robotot, akkor nem lehet majd robotot lerakni a pÃ¡lyÃ¡ra!
+az alapÃ©rtelmezÃ©s sorrendben: 0, 0, 0, 10. (lehet Ã©rdemesebb lenne az egyszerÅ±sÃ©g kedvÃ©Ã©rt mÃ¡s szÃ¡mokat alapÃ©rtelmezÃ©sbe Ã¡llÃ­tani)
 
-Ha létezik a pálya, akkor lehet robotokat, akadályokat, checkpointot, szakadékot stb. pakolni a pályára
+Ha lÃ©tezik a pÃ¡lya, akkor lehet robotokat, akadÃ¡lyokat, checkpointot, szakadÃ©kot stb. pakolni a pÃ¡lyÃ¡ra
 
-Ha a robot lent van a pályán akkor lehet lépkedni vele.
-A mezõk 20 egység szélesek és hosszúak, így lett megírva a vektorátvált
-(tehát a 0,0-ás mezõ 0-19-ig tart mindkét irányban)
+Ha a robot lent van a pÃ¡lyÃ¡n akkor lehet lÃ©pkedni vele.
+A mezÅ‘k 20 egysÃ©g szÃ©lesek Ã©s hosszÃºak, Ã­gy lett megÃ­rva a vektorÃ¡tvÃ¡lt
+(tehÃ¡t a 0,0-Ã¡s mezÅ‘ 0-19-ig tart mindkÃ©t irÃ¡nyban)
 1-gyel le pl a lep 0 25 0 paranccsal tudunk.
 
-Az utolsó parancs a Kilepes, ekkor elmenti a kimenetet a projekt gyökérkönyvtárába output.txt néven
+Az utolsÃ³ parancs a Kilepes, ekkor elmenti a kimenetet a projekt gyÃ¶kÃ©rkÃ¶nyvtÃ¡rÃ¡ba output.txt nÃ©ven
 
-Fájl input = ugyanide egy szöveges fájlt másolva, ahol az elsõ parancs uj_jatek és az utolsó Kilepes, majd ezt paranccsori argumentumként megadva
-a program innen olvassa fel az inputot, és kiírja a konzolra, valamint a fájlba.
+FÃ¡jl input = ugyanide egy szÃ¶veges fÃ¡jlt mÃ¡solva, ahol az elsÅ‘ parancs uj_jatek Ã©s az utolsÃ³ Kilepes, majd ezt paranccsori argumentumkÃ©nt megadva
+a program innen olvassa fel az inputot, Ã©s kiÃ­rja a konzolra, valamint a fÃ¡jlba.
+Ilyenkor kell egy mÃ¡sodik argumentum is, ami az elvÃ¡rt kimenet. Ennek az utolsÃ³ sora az legyen, hogy TESZT VEGE, kÃ¼lÃ¶nben nem mÅ±kÃ¶dik
 
-Nem nézlek ám én hülyének titeket amúgy, csak jó érzés instrukciókat írni :D
+Nem nÃ©zlek Ã¡m Ã©n hÃ¼lyÃ©nek titeket amÃºgy, csak jÃ³ Ã©rzÃ©s instrukciÃ³kat Ã­rni :D
