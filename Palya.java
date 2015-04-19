@@ -61,7 +61,7 @@ public class Palya {
 			
 		}	
 	}
-	
+	//Megkeresi, hogy hol van a pályán a kisrobothoz legközelebbi folt
 	private Vektor foltKeres(KisRobot r){
 		Vektor kozeli = new Vektor(10000, 10000);
 		Vektor mostani = r.getMezo().getPoziciovektor();

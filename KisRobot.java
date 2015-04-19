@@ -66,6 +66,8 @@ public class KisRobot extends Robotok {
 		}
 		
 		setMezo(mezo_c);
+		if(mezo_c.getAkadaly()!=null)
+			this.setFoltonvan(true);
 	}
 
 	public Mezo getMezo() {
