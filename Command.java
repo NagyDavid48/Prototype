@@ -248,7 +248,7 @@ public class Command {
 	}
 
 	private void robo_rlr(String[] cmd) {     // a megadott robotnak meghívjuk a ragacslerak függvényét
-		if (cmd.length == 3){
+		if (cmd.length == 2){
 			try {
 				int index = Integer.parseInt(cmd[1]);
 //				int elet = Integer.parseInt(cmd[2]);
@@ -260,7 +260,7 @@ public class Command {
 	}
 
 	private void robo_olr(String[] cmd) {    // a megadott robotnak meghívjuk az olajlerak függvényét
-		if (cmd.length == 3){
+		if (cmd.length == 2){
 			try {
 				int index = Integer.parseInt(cmd[1]);
 //				int elet = Integer.parseInt(cmd[2]);
