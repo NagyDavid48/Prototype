@@ -28,6 +28,7 @@ public class Keret {
 			reader = new BufferedReader(new FileReader(infile));		// ha volt argumentum, onnan olvasunk
 			testmode = true;
 		} catch(Exception e){
+			System.out.println("Reading file failed");
 			reader = new BufferedReader(new InputStreamReader(System.in)); // ha nem létezik a bemeneti fájl, vagy nincs argumentum, konzolról olvasunk
 		}
 		try{
