@@ -78,6 +78,11 @@ public class Palya {
 			}
 		}
 		
+		if(kozeli.getX()==10000){
+			kozeli.setX(0);
+			kozeli.setY(0);
+		}
+		
 		//Ez indexekben hogy néz ki?
 		int[] idx = r.vektorAtvalt(kozeli);
 		int[] most = r.vektorAtvalt(mostani);

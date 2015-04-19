@@ -128,7 +128,7 @@ public class KisRobot extends Robotok {
 		this.getMezo().setAkadaly(new Olajfolt());	//A helyére olajfolt kerül
 		r.setMezo(mezo);	//A robot megkapja az új mezõt
 		r.setOlajonvan(true);	//Viszont olajfoltra került így
-		
+		this.setMezo(null);
 		return 0; //nincs haszna, csak azért kell mert a Robotok utkozes(Robot r) metódusát implementálja
 	}
 
