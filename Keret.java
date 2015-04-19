@@ -35,7 +35,8 @@ public class Keret {
 			while(cmd.isEnded != true)                   				// amíg meg nem állt a program
 				cmd.fun(cmd.readCommand(reader), writer);               // olvassuk a parancsokat
 			reader.close();
-			writer.println("TESZT VEGE");
+			if (testmode)
+				writer.println("TESZT VEGE");
 			writer.close();
 			if (testmode){
 				reader = new BufferedReader(new FileReader(outfile));
