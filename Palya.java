@@ -126,7 +126,7 @@ public class Palya {
 			else{
 				int jobb=0;
 				int bal=0;
-				while(most[1]+jobb < szelesseg && t.mezok[most[0]][most[1]+jobb].getPalyaszakasz()==true && t.mezok[most[0]-1][most[1]+jobb].getPalyaszakasz()!=true)
+				while(most[1]+jobb < szelesseg && t.mezok[most[0]][most[1]+jobb].getPalyaszakasz()==true && t.mezok[most[0]+1][most[1]+jobb].getPalyaszakasz()!=true)
 					jobb++;
 				while(most[1]-bal >=0 && t.mezok[most[0]][most[1]-bal].getPalyaszakasz()!=true && t.mezok[most[0]+1][most[1]-bal].getPalyaszakasz()!=true)
 					bal++;
