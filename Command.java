@@ -339,6 +339,8 @@ public class Command {
 			try {
 				hanykor = Integer.parseInt(cmd[1]);
 				int vege = hanykor*pm.getRobotszam();      // ahány lépés kell: megadott szám szorozva a robotok számával,
+				if (pm.getRobotszam()==0)
+					vege = hanykor;
 				Vektor uresvektor = new Vektor();          //    ekkor minden robot a megadott számszor lép,
 				for (int i=0;i<vege;i++){                  //    tehát ennyi kör eltelik
 					pm.palya.vektorFeldolgoz(uresvektor);

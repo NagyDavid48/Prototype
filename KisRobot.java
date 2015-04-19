@@ -101,26 +101,7 @@ public class KisRobot extends Robotok {
 		this.sebessegvektor = sebessegvektor;
 	}
 
-	/**
-	 * A robotok vektorát mezõindexekké konvertálja
-	 * Osztás 10-zel, majd a páros koordinátákhoz 1-et hozzáadunk, végül visszaszorozzuk 10-zel.
-	 * Így már kerekítve van.
-	 * Mezõ indexhez osztjuk 10-zel, kivonunk 1-et, majd osztunk 2-vel.
-	 * @param v - Az új sebességvektor
-	 */
-	public int[] vektorAtvalt(Vektor v) {
-		v.skalarOszt(10);
-		if(v.getX()%2==0)
-			v.setX(v.getX()+1);
-		if(v.getY()%2==0)
-			v.setY(v.getY()+1);
-		v.skalarSzoroz(10);
-		
-		int[] tmp = new int[2];
-		tmp[0] = ((v.getX()/10)-1)/2;
-		tmp[1] = ((v.getY()/10)-1)/2;
-		return tmp;
-	}
+
 
 	/**
 	 * Nagy Robot - Kis Robot ütközése
@@ -137,19 +118,6 @@ public class KisRobot extends Robotok {
 		return 0; //nincs haszna, csak azért kell mert a Robotok utkozes(Robot r) metódusát implementálja
 	}
 
-	/**
-	 * Kis Robot - Kis Robot ütközése
-	 * Az egyik kisrobot ráugrik a másikra.
-	 * Ezután visszapattan a kiinduló helyére
-	 * @param r - A visszapattanó kisrobot
-	 */
-	public void utkozes(KisRobot r) {
-		Vektor tmp = r.getSebessegvektor(); //A kisrobot sebességvektora
-		tmp.skalarSzoroz(-1); //megfordítjuk, hogy visszalépjen
-		r.lep(tmp);//Visszaléptetjük a kiindulási mezõbe
-		tmp.skalarSzoroz(-1);//Visszafodítjuk a vektorát
-		r.setSebessegvektor(tmp);//Végül visszaállítjuk a kisrobot eredeti vektorát
-	}
 	
 	/**
 	 * A kisrobot ha talál egy foltot, azt takarítja
