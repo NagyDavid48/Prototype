@@ -1,0 +1,24 @@
+Phoebe Prototype Kezelési útmutató
+
+A parancsok a 7-es doksiban vannak, ezek majdnem tökéletesen ugyanúgy működnek, egy változtatás,
+hogy az akadálylerakásoknál nem lehet életet megadni (az alapértelmezésben 4), valamint a krl-nál nem kell kisrobot index, csak mező.
+
+Az első parancs mindenképp uj_jatek, ez inicializálja a pályamenedzsert.
+ezután a robo_be, rag_be, olj_be, kor_be parancsokkal konfigurálhatjuk a pályát,
+amit a palya paranccsal hozhatunk létre. Ha nem állítottunk be előtte pl robotot, akkor nem lehet majd robotot lerakni a pályára!
+az alapértelmezés sorrendben: 0, 0, 0, 10. (lehet érdemesebb lenne az egyszerűség kedvéért más számokat alapértelmezésbe állítani)
+
+Ha létezik a pálya, akkor lehet robotokat, akadályokat, checkpointot, szakadékot stb. pakolni a pályára
+
+Ha a robot lent van a pályán akkor lehet lépkedni vele.
+A mezők 20 egység szélesek és hosszúak, így lett megírva a vektorátvált
+(tehát a 0,0-ás mező 0-19-ig tart mindkét irányban)
+1-gyel le pl a lep 0 25 0 paranccsal tudunk.
+
+Az utolsó parancs a Kilepes, ekkor elmenti a kimenetet a projekt gyökérkönyvtárába output.txt néven
+
+Fájl input = ugyanide egy szöveges fájlt másolva, ahol az első parancs uj_jatek és az utolsó Kilepes, majd ezt paranccsori argumentumként megadva
+a program innen olvassa fel az inputot, és kiírja a konzolra, valamint a fájlba.
+Ilyenkor kell egy második argumentum is, ami az elvárt kimenet. Ennek az utolsó sora az legyen, hogy TESZT VEGE, különben nem működik
+
+Nem nézlek ám én hülyének titeket amúgy, csak jó érzés instrukciókat írni :D
