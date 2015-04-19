@@ -66,8 +66,7 @@ public class KisRobot extends Robotok {
 			Robotok r = mezo_c.getRobot();
 			r.utkozes(this);
 		}
-		
-		if(this.kiesett == false)
+		else if(this.kiesett == false)
 			setMezo(mezo_c);
 		
 		if(mezo_c.getAkadaly()!=null){

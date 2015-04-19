@@ -222,9 +222,11 @@ public class Robot extends Robotok {
 		if(x <= 0){//Ha az allo volt a lassabb vagy egyenloek voltak.
 			this.setKiesett(true);//Kiesett és a mezõt már átállítottuk null-ra, hiszen ez ugrik
 			this.setMezo(null);//Mivel mar nam letezik a mezon sem all
+			r.getSebessegvektor().atlagol(sebessegvektor);
 			return 0;
 		}
 		else{
+			sebessegvektor.atlagol(r.getSebessegvektor());
 			return 1;//Az allo volt a gyorsabb, az ugro pusztul.
 		}
 	}
