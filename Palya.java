@@ -73,7 +73,7 @@ public class Palya {
 		//Megnézzük merre vannak foltok, kiválasztjuk a legközelebbit
 		for(int i=0; i < magassag; i++){
 			for(int j = 0; j < szelesseg; j++){
-				if(t.mezok[i][j].getAkadaly()!=null && t.mezok[i][j].getRobot()==null){
+				if(t.mezok[i][j].getAkadaly()!=null && t.mezok[i][j].getAkadaly().getTakaritjak()==false){
 					Vektor tmp = t.mezok[i][j].getPoziciovektor().subVektor(mostani);
 					if(tmp.hossz()<kozeli.hossz()){
 						kozeli = tmp;
@@ -95,24 +95,45 @@ public class Palya {
 		//idx[1]-->vízszintesen mennyit kell menni a legközelebbi foltig
 		
 		//elõbb függõlegesen ameddig tud
+		//Ha jó sorban vagyunk vagy nem tudunk függõlegesen menni, induljunk el vízszintesen
 		//lefelé kell?
-		if(idx[0]<0 && t.mezok[most[0]-1][most[1]].getPalyaszakasz()==true){
-			return new Vektor(-20, 0);
+		if(idx[0]<0){
+			if(t.mezok[most[0]-1][most[1]].getPalyaszakasz()==true)
+				return new Vektor(-20, 0);
+			if(most[1]>=0 && t.mezok[most[0]][most[1]-1].getPalyaszakasz()==true)
+				return new Vektor(0, -20);
+			if(most[1]<szelesseg && t.mezok[most[0]][most[1]-1].getPalyaszakasz()==true)
+				return new Vektor(0, 20);
 		}
 		//vagy felfelé?
-		else if(idx[0]>0 && t.mezok[most[0]+1][most[1]].getPalyaszakasz()==true){
-			return new Vektor(20, 0);
+		else if(idx[0]>0){
+			if(t.mezok[most[0]+1][most[1]].getPalyaszakasz()==true)
+				return new Vektor(20, 0);
+			if(most[1]>0 && t.mezok[most[0]][most[1]-1].getPalyaszakasz()==true)
+				return new Vektor(0, -20);
+			if(most[1]<szelesseg-1 && t.mezok[most[0]][most[1]-1].getPalyaszakasz()==true)
+				return new Vektor(0, 20);
 		}
-		//Ha jó sorban vagyunk vagy nem tudunk függõlegesen menni, induljunk el vízszintesen
+		
 		//balra tán?
-		else if(idx[1]<0 && t.mezok[most[0]][most[1]-1].getPalyaszakasz()==true){
-			return new Vektor(0, -20);
+		else if(idx[1]<0){
+			if(t.mezok[most[0]][most[1]-1].getPalyaszakasz()==true)
+				return new Vektor(0, -20);
+			if(most[0]>=0 && t.mezok[most[0]][most[1]-1].getPalyaszakasz()==true)
+				return new Vektor(-20, 0);
+			if(most[0]<magassag && t.mezok[most[0]][most[1]-1].getPalyaszakasz()==true)
+				return new Vektor(20, 0);
 		}
 		//marad a jobbra
-		else if(idx[1]>0 && t.mezok[most[0]][most[1]+1].getPalyaszakasz()==true){
-			return new Vektor(0, 20);
+		else if(idx[1]>0){
+			if(t.mezok[most[0]][most[1]+1].getPalyaszakasz()==true)
+				return new Vektor(0, 20);
+			if(most[0]>=0 && t.mezok[most[0]][most[1]-1].getPalyaszakasz()==true)
+				return new Vektor(-20, 0);
+			if(most[0]<magassag && t.mezok[most[0]][most[1]-1].getPalyaszakasz()==true)
+				return new Vektor(20, 0);
 		}
-		else return new Vektor();
+		return new Vektor();
 	}
 	
 	/**
