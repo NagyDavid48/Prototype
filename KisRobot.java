@@ -59,15 +59,21 @@ public class KisRobot extends Robotok {
 		
 		this.mezo.setRobot(null);
 		
-		setMezo(mezo_c);
+//		setMezo(mezo_c);
+//		mezo=mezo_c;
 		
 		if(mezo_c.getRobot()!=null && this.kiesett == false){
 			Robotok r = mezo_c.getRobot();
 			r.utkozes(this);
 		}
 		
-		if(mezo_c.getAkadaly()!=null)
+		if(this.kiesett == false)
+			setMezo(mezo_c);
+		
+		if(mezo_c.getAkadaly()!=null){
 			this.setFoltonvan(true);
+			mezo_c.getAkadaly().setTakaritjak(true);
+		}
 	}
 
 	public Mezo getMezo() {

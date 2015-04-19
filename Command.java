@@ -347,7 +347,7 @@ public class Command {
 			} catch (NumberFormatException e) {
 				System.out.println("Egész számot írj paraméternek!");
 			} catch (NullPointerException e2){
-				System.out.println("Nem kezdtél új játékot, vagy nincs még pálya!");
+				e2.printStackTrace();
 			}
 		}else System.out.println("Használat: kor_lep <szam>");
 	}

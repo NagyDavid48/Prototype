@@ -33,46 +33,53 @@ public class Robot extends Robotok {
 	 */
 	// Elvileg kész
 	public void lep(Vektor v) {				//lehet már nincs is szükség erre a visszatérési értékre
-		sebessegvektor.addVektor(v);
-		Vektor poz = mezo.getPoziciovektor();
+		if (olajonvan == false)				// ha olajon vagyunk, nem változtathatunk sebességet
+			sebessegvektor.addVektor(v);
+		Vektor poz = mezo.getPoziciovektor();	// a jelenlegi pozíciónk helyvektora
 		//az alábbi mûveletet kiszedtem a vektorátváltból, mert így tudom kiíratni, hogy a kisrobot melyik mezõn van
 		//ráadásul az jobb, ha a vekotrátvál nevû függvény csak átváltja  a vektotr és nem csinál mást
-		Vektor pozicio = sebessegvektor.addVektor2(poz);
-		Mezo mezo_c = Tarolo.getMezo(vektorAtvalt(pozicio));
+		Vektor pozicio = sebessegvektor.addVektor2(poz);	// a célmezõ helyvektora (sebesség+hely)
 		
-		this.mezo.setRobot(null);
-		
-		if(mezo_c.getPalyaszakasz() == false)
-			this.kiesett = true;
-		
-		if(mezo_c.getRobot() != null && this.kiesett == false){
-			Robotok r = mezo_c.getRobot();
-			int eredmeny = r.utkozes(this);
-			if(eredmeny == 0)
-				this.mezo = mezo_c;
-			else{
-				this.mezo = null;
-				this.setKiesett(true);
-			}
-		}
-		
-		if(mezo_c.getAkadaly() != null && this.kiesett == false){
-			Akadaly a = mezo_c.getAkadaly();
-			int elet = a.getElet();
-				if(elet == 0){
-					mezo_c.setAkadaly(null);
-				}else{
-					a.viselkedes(this);
+		try {
+			
+			this.mezo.setRobot(null);						// elugrunk a mezõrõl
+			
+			Mezo mezo_c = Tarolo.getMezo(vektorAtvalt(pozicio));// a célmezõ kiszámolása
+			if(mezo_c.getPalyaszakasz() == false)
+				this.kiesett = true;
+			
+			if(mezo_c.getRobot() != null && this.kiesett == false){
+				Robotok r = mezo_c.getRobot();
+				int eredmeny = r.utkozes(this);
+				if(eredmeny == 0)
+					this.mezo = mezo_c;
+				else{
+					this.mezo = null;
+					this.setKiesett(true);
 				}
-		}
-		
-		if(mezo_c.getCheckpoint() == true && this.kiesett == false){
-			this.addCheckpoint();
-			mezo_c.setCheckpoint(false);
-		}
-		
-		if(this.kiesett == false){
-			setMezo(mezo_c);
+			}
+			
+			if(mezo_c.getAkadaly() != null && this.kiesett == false){
+				Akadaly a = mezo_c.getAkadaly();
+				int elet = a.getElet();
+					if(elet == 0){
+						mezo_c.setAkadaly(null);
+					}else{
+						a.viselkedes(this);
+					}
+			}
+			
+			if(mezo_c.getCheckpoint() == true && this.kiesett == false){
+				this.addCheckpoint();
+				mezo_c.setCheckpoint(false);
+			}
+			
+			if(this.kiesett == false){
+				setMezo(mezo_c);
+			}
+		} catch (IndexOutOfBoundsException e) {								// ha leestünk a pálya szélérõl, kiestünk
+			this.kiesett = true;
+			setMezo(null);
 		}
 			
 	}
@@ -228,11 +235,12 @@ public class Robot extends Robotok {
 	 * @param r - Kis robot, ami ra ugrik a nagyra.
 	 */
 	public void utkozes(KisRobot r) {
-		Vektor tmp = r.getSebessegvektor();//Aktualis seb. v.
+//		Vektor tmp = r.getSebessegvektor();//Aktualis seb. v.
+		Vektor tmp = new Vektor();
 		tmp.skalarSzoroz(-1);//Vissza kell pattania.
 		r.lep(tmp);//Ezzel leptetjuk vissza. Remelhetoleg a kiindulasi mezobe ter vissza.
-		tmp.skalarSzoroz(-1);//Az eredeti vektort vissza kellene allitani.
-		r.setSebessegvektor(tmp);
+//		tmp.skalarSzoroz(-1);//Az eredeti vektort vissza kellene allitani.
+//		r.setSebessegvektor(tmp);
 		
 	}
 

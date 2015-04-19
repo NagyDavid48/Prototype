@@ -46,8 +46,12 @@ public class Palya {
 	 */
 	//elvileg kész
 	public void vektorFeldolgoz(Vektor v) {
-		robotLeptet(robotok.get(soronlevo),v);
-		if(soronlevo++ == robotok.size()){
+		if(soronlevo >= robotok.size())
+			soronlevo = 0;
+			
+		robotLeptet(robotok.get(soronlevo),v);	
+		
+		if(soronlevo == robotok.size()){
 			soronlevo = 0;
 			if (kisrobotok.size() != 0){
 				int i = 0;
@@ -58,8 +62,7 @@ public class Palya {
 					i++;
 				}
 			}
-			
-		}	
+		}
 	}
 	//Megkeresi, hogy hol van a pályán a kisrobothoz legközelebbi folt
 	private Vektor foltKeres(KisRobot r){
@@ -183,6 +186,7 @@ public class Palya {
 	//kész
 	public void olajLerak(Robot r) {
 		r.olajLerak();
+		soronlevo++;
 	}
 
 	/**
@@ -192,6 +196,7 @@ public class Palya {
 	//kész
 	public void ragacsLerak(Robot r) {
 		r.ragacsLerak();
+		soronlevo++;
 	}
 
 	public int gyoztesValaszt() {
