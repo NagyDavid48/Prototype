@@ -278,8 +278,8 @@ public class Palya {
 					if(elet==0){
 						m[i][j].setAkadaly(null);
 						while (k<kisrobotok.size()){
-							if(m[i][j] == kisrobotok.get(i).getMezo())
-								kisrobotok.get(i).setFoltonvan(false);
+							if(m[i][j] == kisrobotok.get(k).getMezo())
+								kisrobotok.get(k).setFoltonvan(false);
 							k++;
 						}
 					}
