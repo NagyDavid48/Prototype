@@ -79,6 +79,7 @@ public class Robot extends Robotok {
 			}
 		} catch (IndexOutOfBoundsException e) {								// ha leestünk a pálya szélérõl, kiestünk
 			this.kiesett = true;
+			this.olajonvan = false;
 			setMezo(null);
 		}
 			
