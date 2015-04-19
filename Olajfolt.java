@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 public class Olajfolt extends Akadaly {
 	
 	public Olajfolt(){
-		this.elet = 4;
+		this.elet = 9;
 		this.takaritjak = false;
 	}
 	
