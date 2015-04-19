@@ -53,14 +53,58 @@ public class Palya {
 				int i = 0;
 				while(i<kisrobotok.size())
 				{
-					kisrobotLeptet(kisrobotok.get(i),v);
+					/*Ide kéne az akadálytaláló magic algoritmus*/
+					kisrobotLeptet(kisrobotok.get(i),foltKeres(kisrobotok.get(i)));
 					i++;
 				}
 			}
 			
 		}	
 	}
-
+	
+	private Vektor foltKeres(KisRobot r){
+		Vektor kozeli = new Vektor(10000, 10000);
+		Vektor mostani = r.getMezo().getPoziciovektor();
+		
+		//Megnézzük merre vannak foltok, kiválasztjuk a legközelebbit
+		for(int i=0; i < magassag; i++){
+			for(int j = 0; j < szelesseg; j++){
+				if(t.mezok[i][j].getAkadaly()!=null && t.mezok[i][j].getRobot()==null){
+					Vektor tmp = t.mezok[i][j].getPoziciovektor().subVektor(mostani);
+					if(tmp.hossz()<kozeli.hossz()){
+						kozeli = tmp;
+					}
+				}
+			}
+		}
+		
+		//Ez indexekben hogy néz ki?
+		int[] idx = r.vektorAtvalt(kozeli);
+		int[] most = r.vektorAtvalt(mostani);
+		
+		//idx[0]-->függõlegesen mennyit kell menni a legközelebbi foltig
+		//idx[1]-->vízszintesen mennyit kell menni a legközelebbi foltig
+		
+		//elõbb függõlegesen ameddig tud
+		//lefelé kell?
+		if(idx[0]<0 && t.mezok[most[0]-1][most[1]].getPalyaszakasz()==true){
+			return new Vektor(-20, 0);
+		}
+		//vagy felfelé?
+		else if(idx[0]>0 && t.mezok[most[0]+1][most[1]].getPalyaszakasz()==true){
+			return new Vektor(20, 0);
+		}
+		//Ha jó sorban vagyunk vagy nem tudunk függõlegesen menni, induljunk el vízszintesen
+		//balra tán?
+		else if(idx[1]<0 && t.mezok[most[0]][most[1]-1].getPalyaszakasz()==true){
+			return new Vektor(0, -20);
+		}
+		//marad a jobbra
+		else //if(idx[1]>0 && t.mezok[most[0]][most[1]+1].getPalyaszakasz()==true){
+			return new Vektor(0, 20);
+		//}
+	}
+	
 	/**
 	 * 
 	 * @param r
@@ -176,6 +220,7 @@ public class Palya {
 						while (k<kisrobotok.size()){
 							if(m[i][j] == kisrobotok.get(i).getMezo())
 								kisrobotok.get(i).setFoltonvan(false);
+							k++;
 						}
 					}
 				}

@@ -10,7 +10,7 @@ public class KisRobot extends Robotok {
 	private boolean kiesett;
 
 	public KisRobot() {
-		sebessegvektor = new Vektor(10, 10);
+		sebessegvektor = new Vektor();
 		mezo = null;
 		foltonvan = false;
 		kiesett = false;
@@ -45,21 +45,27 @@ public class KisRobot extends Robotok {
 	 * @param v
 	 */
 	public void lep(Vektor v) {
-		// TODO - implement KisRobot.lep
+		//Ha már meghalt szegény akkor ne is lépjen
+		if (this.kiesett == true){
+			return;
+		}
+		
 		this.setSebessegvektor(v);
 		Vektor poz = mezo.getPoziciovektor();
+		//az alábbi mûveletet kiszedtem a vektorátváltból, mert így tudom kiíratni, hogy a kisrobot melyik mezõn van
+		//ráadásul az jobb, ha a vekotrátvál nevû függvény csak átváltja  a vektotr és nem csinál mást
 		Vektor pozicio = sebessegvektor.addVektor2(poz);		
 		Mezo mezo_c = Tarolo.getMezo(vektorAtvalt(pozicio));
 		
-		if(mezo_c.getPalyaszakasz()==true && mezo_c.getAkadaly()==null && mezo_c.getRobot()==null){
-			
+		this.mezo.setRobot(null);
+		
+		
+		if(mezo_c.getRobot()!=null && this.kiesett == false){
+			Robotok r = mezo_c.getRobot();
+			r.utkozes(this);
 		}
 		
-
-		//az alábbi mûveletet kiszedtem a vektorátváltból, mert így tudom kiíratni, hogy a kisrobot melyik mezõn van
-		//ráadásul az jobb, ha a vekotrátvál nevû függvény csak átváltja  a vektotr és nem csinál mást
-		
-		throw new UnsupportedOperationException();
+		setMezo(mezo_c);
 	}
 
 	public Mezo getMezo() {
@@ -72,7 +78,8 @@ public class KisRobot extends Robotok {
 	 */
 	public void setMezo(Mezo mezo) {
 		this.mezo = mezo;
-		mezo.setRobot(this);
+		if(mezo!=null)
+			mezo.setRobot(this);
 	}
 
 	public Vektor getSebessegvektor() {
@@ -88,8 +95,11 @@ public class KisRobot extends Robotok {
 	}
 
 	/**
-	 * 
-	 * @param v
+	 * A robotok vektorát mezõindexekké konvertálja
+	 * Osztás 10-zel, majd a páros koordinátákhoz 1-et hozzáadunk, végül visszaszorozzuk 10-zel.
+	 * Így már kerekítve van.
+	 * Mezõ indexhez osztjuk 10-zel, kivonunk 1-et, majd osztunk 2-vel.
+	 * @param v - Az új sebességvektor
 	 */
 	public int[] vektorAtvalt(Vektor v) {
 		v.skalarOszt(10);
@@ -106,29 +116,44 @@ public class KisRobot extends Robotok {
 	}
 
 	/**
-	 * 
-	 * @param r
+	 * Nagy Robot - Kis Robot ütközése
+	 * Egy robot ráugrik a kisrobotra.
+	 * A kisrobot megsemmisül és olajfoltot hagy maga után.
+	 * @param r - A nagy robot, ami megsemmisíti a kicsit
 	 */
 	public int utkozes(Robot r) {
-		// TODO - implement KisRobot.utkozes
-		throw new UnsupportedOperationException();
+		this.setKiesett(true);	//Szegény kisrobotnak annyi
+		this.getMezo().setAkadaly(new Olajfolt());	//A helyére olajfolt kerül
+		r.setMezo(mezo);	//A robot megkapja az új mezõt
+		r.setOlajonvan(true);	//Viszont olajfoltra került így
+		
+		return 0; //nincs haszna, csak azért kell mert a Robotok utkozes(Robot r) metódusát implementálja
 	}
 
 	/**
-	 * 
-	 * @param r
+	 * Kis Robot - Kis Robot ütközése
+	 * Az egyik kisrobot ráugrik a másikra.
+	 * Ezután visszapattan a kiinduló helyére
+	 * @param r - A visszapattanó kisrobot
 	 */
 	public void utkozes(KisRobot r) {
-		// TODO - implement KisRobot.utkozes
-		throw new UnsupportedOperationException();
+		Vektor tmp = r.getSebessegvektor(); //A kisrobot sebességvektora
+		tmp.skalarSzoroz(-1); //megfordítjuk, hogy visszalépjen
+		r.lep(tmp);//Visszaléptetjük a kiindulási mezõbe
+		tmp.skalarSzoroz(-1);//Visszafodítjuk a vektorát
+		r.setSebessegvektor(tmp);//Végül visszaállítjuk a kisrobot eredeti vektorát
 	}
-
+	
+	/**
+	 * A kisrobot ha talál egy foltot, azt takarítja
+	 * 
+	 */
 	public void takarit() {
-		if(mezo.getAkadaly().getElet()==0){
-				mezo.setAkadaly(null);
-				this.setFoltonvan(false);
+		if(mezo.getAkadaly().getElet()==0){	//Ha a foltnak 0 az élete
+				mezo.setAkadaly(null);		//Akkor eltûnik
+				this.setFoltonvan(false);	//És így a kisrobot sincs már folton
 		}else 
-			mezo.getAkadaly().eletcsokkent();
+			mezo.getAkadaly().eletcsokkent();//Ellenben takarítja
 	}
 	
 	public void kiirstat(int i, PrintWriter w) { // még nem teljesen mûködik, a mezõnek null a pozícióvektora

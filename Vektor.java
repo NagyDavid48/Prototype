@@ -33,6 +33,15 @@ public class Vektor {
 	}
 	
 	/**
+	 * Kivonja a hívó vektorból a kapott vektort és visszaadja a különbségét
+	 * @param v - másik vektor
+	 */
+	public Vektor subVektor(Vektor v){
+		return new Vektor(this.x-v.getX(), this.y-v.getY()); 
+	}
+	
+	
+	/**
 	 * Egy UJ VEKTORT HOZZ LETRE. A hivo vektor koordinatait hozza adja a másikéhoz.
 	 * @param w - Masik vektor
 	 * @return - Az uj vektor a masik ketto osszegevel.
