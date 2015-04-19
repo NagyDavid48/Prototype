@@ -144,17 +144,7 @@ public class Palya {
 		else if(idx[1]<0){
 			if(t.mezok[most[0]][most[1]-1].getPalyaszakasz()==true)
 				return new Vektor(0, -20);
-			else{
-				int jobb=0;
-				int bal=0;
-				while(most[1]+jobb < szelesseg && t.mezok[most[0]][most[1]+jobb].getPalyaszakasz()==true && t.mezok[most[0]-1][most[1]+jobb].getPalyaszakasz()!=true)
-					jobb++;
-				while(most[1]-bal >=0 && t.mezok[most[0]][most[1]-bal].getPalyaszakasz()!=true && t.mezok[most[0]-1][most[1]-bal].getPalyaszakasz()!=true)
-					bal++;
-				if(bal<jobb){
-					return new Vektor(0, -20);
-				}else return new Vektor(0, 20);
-			}
+			
 			/*if(most[0]>=0 && t.mezok[most[0]][most[1]-1].getPalyaszakasz()==true)
 				return new Vektor(-20, 0);
 			if(most[0]<magassag && t.mezok[most[0]][most[1]-1].getPalyaszakasz()==true)
