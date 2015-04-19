@@ -177,7 +177,7 @@ public class Command {
 			} catch (NumberFormatException e) {
 				System.out.println("Egész számot írj paraméternek!");
 			}
-		else System.out.println("Használat: palya <szelesseg> <magassag>");
+		else System.out.println("Használat: palya <magassag> <szelesseg>");
 	}
 
 	private void kiirpalya(String[] cmd, PrintWriter w) { // kiírjuk az összes mezõ adatait

@@ -23,7 +23,7 @@ public class Palya {
 	 * @param olaj
 	 * @param ragacs
 	 */
-	public Palya(int szelesseg, int magassag, int robotszam, int olaj, int ragacs) {
+	public Palya(int magassag, int szelesseg, int robotszam, int olaj, int ragacs) {
 		this.robotok = new ArrayList<Robot>();
 		this.kisrobotok = new ArrayList<KisRobot>();
 		this.magassag = magassag;
@@ -32,7 +32,7 @@ public class Palya {
 		
 		//hogyan állítsuk be a mezõk specialításait akadály, robot, cp, szakadek 
 		//Egyelõre meredt úgy hogy sima mezõket hoz létre nincs rajta semmi és nem szakadék
-		t = new Tarolo(szelesseg, magassag);
+		t = new Tarolo(magassag, szelesseg);
 		
 		//robot melyik mezõre kerüljön, mi alapján válasszunk random normál üres mezõ?
 		//Egyelõre valószínûleg a keretprogram fogja megmondani

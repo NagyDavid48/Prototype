@@ -22,14 +22,14 @@ public class Palya_Menedzser {
 	 * @param ragacs - Ennyi ragacsa legyen a robotoknak.
 	 * @param olaj - Ennyi olaja legyen a robotoknak.
 	 */
-	public Palya_Menedzser(int szelesseg, int magassag, int robotszam, int kor, int ragacs, int olaj) {
+	public Palya_Menedzser(int magassag, int szelesseg, int robotszam, int kor, int ragacs, int olaj) {
 		this.kor = kor;
 		this.ragacskeszlet = ragacs;
 		this.olajkeszlet = olaj;
 		this.robotszam = robotszam;
 		this.robocntr = 0;
 		//this.cntr = new int[]{0, 0};//0. a cp. 1. kisrobot
-		this.palya = palyaLetreHoz(szelesseg, magassag);
+		this.palya = palyaLetreHoz(magassag, szelesseg);
 	}
 	
 	
@@ -37,8 +37,8 @@ public class Palya_Menedzser {
 	public Palya_Menedzser(){}
 	
 	
-	public Palya palyaLetreHoz(int szelesseg, int magassag){
-		return new Palya(szelesseg, magassag, robotszam, olajkeszlet, ragacskeszlet);
+	public Palya palyaLetreHoz(int magassag, int szelesseg){
+		return new Palya(magassag, szelesseg,robotszam, olajkeszlet, ragacskeszlet);
 	}
 	
 	//Valahogy meg kell oldani az inputok feldolgozasat. - Megbeszeles.
