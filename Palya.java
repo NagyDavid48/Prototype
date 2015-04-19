@@ -100,9 +100,10 @@ public class Palya {
 			return new Vektor(0, -20);
 		}
 		//marad a jobbra
-		else //if(idx[1]>0 && t.mezok[most[0]][most[1]+1].getPalyaszakasz()==true){
+		else if(idx[1]>0 && t.mezok[most[0]][most[1]+1].getPalyaszakasz()==true){
 			return new Vektor(0, 20);
-		//}
+		}
+		else return new Vektor();
 	}
 	
 	/**
