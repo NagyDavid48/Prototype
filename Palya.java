@@ -58,7 +58,8 @@ public class Palya {
 				while(i<kisrobotok.size())
 				{
 					/*Ide kéne az akadálytaláló magic algoritmus*/
-					kisrobotLeptet(kisrobotok.get(i),foltKeres(kisrobotok.get(i)));
+					if (!kisrobotok.get(i).getKiesett())
+						kisrobotLeptet(kisrobotok.get(i),foltKeres(kisrobotok.get(i)));
 					i++;
 				}
 			}

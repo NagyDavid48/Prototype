@@ -165,8 +165,12 @@ public class KisRobot extends Robotok {
 	}
 	
 	public void kiirstat(int i, PrintWriter w) { // még nem teljesen mûködik, a mezõnek null a pozícióvektora
-		int pozX=vektorAtvalt(mezo.getPoziciovektor())[0];
-		int pozY=vektorAtvalt(mezo.getPoziciovektor())[1];
+		String pozX = "null";
+		String pozY = "null";
+		if (!kiesett){
+			pozX=""+vektorAtvalt(mezo.getPoziciovektor())[0];
+			pozY=""+vektorAtvalt(mezo.getPoziciovektor())[1];
+		}
 		System.out.print("kisrobot "+i+" "+pozX+" "+pozY+" "+foltonvan+" "+kiesett);
 		w.print("kisrobot "+i+" "+pozX+" "+pozY+" "+foltonvan+" "+kiesett);
 	}
