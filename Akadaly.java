@@ -53,5 +53,5 @@ public abstract class Akadaly {
 		this.takaritjak = takaritjak;
 	}
 	
-	public void kiirstat(PrintWriter w){}
+	public abstract void kiirstat(PrintWriter w);
 }
