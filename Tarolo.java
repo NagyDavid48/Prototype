@@ -9,7 +9,7 @@ public class Tarolo {
 	 * @param szelesseg
 	 * @param magassag
 	 */
-	public Tarolo(int szelesseg, int magassag) {
+	public Tarolo(int magassag, int szelesseg) {
 		Mezo[][] tmp = new Mezo [magassag][szelesseg];
 		
 		for(int i = 0 ; i<magassag; i++)

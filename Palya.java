@@ -23,7 +23,7 @@ public class Palya {
 	 * @param olaj
 	 * @param ragacs
 	 */
-	public Palya(int szelesseg, int magassag, int robotszam, int olaj, int ragacs) {
+	public Palya(int magassag, int szelesseg, int robotszam, int olaj, int ragacs) {
 		this.robotok = new ArrayList<Robot>();
 		this.kisrobotok = new ArrayList<KisRobot>();
 		this.magassag = magassag;
@@ -32,7 +32,7 @@ public class Palya {
 		
 		//hogyan állítsuk be a mezõk specialításait akadály, robot, cp, szakadek 
 		//Egyelõre meredt úgy hogy sima mezõket hoz létre nincs rajta semmi és nem szakadék
-		t = new Tarolo(szelesseg, magassag);
+		t = new Tarolo(magassag, szelesseg);
 		
 		//robot melyik mezõre kerüljön, mi alapján válasszunk random normál üres mezõ?
 		//Egyelõre valószínûleg a keretprogram fogja megmondani
@@ -102,6 +102,10 @@ public class Palya {
 			if(t.mezok[most[0]-1][most[1]].getPalyaszakasz()==true)
 				return new Vektor(-20, 0);
 			else{
+				if(most[1]==0)
+					return new Vektor(0, 20);
+				if(most[1]==szelesseg-1)
+					return new Vektor(0, -20);
 				int jobb=0;
 				int bal=0;
 				while(most[1]+jobb < szelesseg && t.mezok[most[0]][most[1]+jobb].getPalyaszakasz()==true && t.mezok[most[0]-1][most[1]+jobb].getPalyaszakasz()!=true)
@@ -124,6 +128,10 @@ public class Palya {
 			if(t.mezok[most[0]+1][most[1]].getPalyaszakasz()==true)
 				return new Vektor(20, 0);
 			else{
+				if(most[1]==0)
+					return new Vektor(0, 20);
+				if(most[1]==szelesseg-1)
+					return new Vektor(0, -20);
 				int jobb=0;
 				int bal=0;
 				while(most[1]+jobb < szelesseg && t.mezok[most[0]][most[1]+jobb].getPalyaszakasz()==true && t.mezok[most[0]+1][most[1]+jobb].getPalyaszakasz()!=true)
@@ -265,31 +273,27 @@ public class Palya {
 		
 	}
 
-	//elvileg kész
+	/**
+	 * Az olajfoltot oregitjuk ezzel. Minden korben eggyel csokken az olajfolt elete, ha nincs rajta kis robot, akkor kettovel.
+	 */
 	public void oregit() {
-		Mezo[][] m = t.getMezok();
+		Mezo[][] m = t.getMezok();//Lekérdezzük a vilagot
 		int elet;
 		int k = 0;
-		for(int i = 0; i<magassag; i++){
-			for(int j = 0; j<szelesseg; j++){
-				if(m[i][j].getAkadaly() != null){
-					m[i][j].getAkadaly().oregit();
+		for(int i = 0; i<magassag; i++){//Hosszaban
+			for(int j = 0; j<szelesseg; j++){//Szelteben
+				if(m[i][j].getAkadaly() != null){//Ha van akadaly az adott mezon
+					m[i][j].getAkadaly().oregit();//Szimplan oregitjuk
 					elet = m[i][j].getAkadaly().getElet();
-					if(elet==0){
-						m[i][j].setAkadaly(null);
-						while (k<kisrobotok.size()){
-							if(m[i][j] == kisrobotok.get(k).getMezo())
-								kisrobotok.get(k).setFoltonvan(false);
-							k++;
+					if(elet==0){//Ha vege van
+						m[i][j].setAkadaly(null);//Akkor eltuntejuk
+						while (k<kisrobotok.size()){//Vegig megyunk a kisrobotok tombjen
+							if(m[i][j] == kisrobotok.get(k).getMezo())//Ha az akadaly helyen van kisrobot
+								kisrobotok.get(k).setFoltonvan(false);//Akkor ezt megszüntetjuk
 						}
 					}
-				}
+				}//Ha nincs, akkor nem csinalunk semmit.
 			}
 		}
 	}
-	
-	
-	
-	
-
 }
