@@ -13,10 +13,25 @@ public abstract class Robotok {
 	public abstract void lep(Vektor v);
 
 	/**
-	 * Vektorbol csinal mezo indexet.
-	 * @param v - Uj seb. v.
+	 * A robotok vektorát mezõindexekké konvertálja
+	 * Osztás 10-zel, majd a páros koordinátákhoz 1-et hozzáadunk, végül visszaszorozzuk 10-zel.
+	 * Így már kerekítve van.
+	 * Mezõ indexhez osztjuk 10-zel, kivonunk 1-et, majd osztunk 2-vel.
+	 * @param v - Az új sebességvektor
 	 */
-	public abstract int[] vektorAtvalt(Vektor v);
+	public int[] vektorAtvalt(Vektor v){
+		v.skalarOszt(10);
+		if(v.getX()%2==0)
+			v.setX(v.getX()+1);
+		if(v.getY()%2==0)
+			v.setY(v.getY()+1);
+		v.skalarSzoroz(10);
+		
+		int[] tmp = new int[2];
+		tmp[0] = ((v.getX()/10)-1)/2;
+		tmp[1] = ((v.getY()/10)-1)/2;
+		return tmp;
+	}
 
 	/**
 	 * Utkozes kezelesere.
@@ -24,12 +39,16 @@ public abstract class Robotok {
 	 */
 	public abstract int utkozes(Robot r);
 
+
 	/**
-	 * Kisrobotok mashogy viselkednek.
-	 * Muszaj egy maik fv. erre.
-	 * @param r - Ugro kis robot.
+	 * Kis Robot utkozese.
+	 * A kisrobot raugrik a masik robotra, ekkor vissza kerul az eredeti poziciojara.
+	 * Lepattan a masikrol.
+	 * @param r - Kis robot, ami raugrik a masikra.
 	 */
-	public abstract void utkozes(KisRobot r);
+	public void utkozes(KisRobot r){
+		r.lep(new Vektor());
+	}
 	
 	/**
 	 * Adatok kiíratására

@@ -48,8 +48,9 @@ public class Palya {
 	public void vektorFeldolgoz(Vektor v) {
 		if(soronlevo >= robotok.size())
 			soronlevo = 0;
-			
-		robotLeptet(robotok.get(soronlevo),v);	
+		
+		if (robotok.size() > 0)
+			robotLeptet(robotok.get(soronlevo),v);	
 		
 		if(soronlevo == robotok.size()){
 			soronlevo = 0;

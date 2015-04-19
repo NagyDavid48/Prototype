@@ -85,27 +85,6 @@ public class Robot extends Robotok {
 			
 	}
 
-	/**
-	 * A lepeshez atvaltja a vektorokat mezo indexe.
-	 * Osszeadja az uj seb.v.-t es a jelenlegi seb. v.-t es elosztja 10-zel.
-	 * Ha valamelyik koordinata paros, hozza ad egyet.
-	 * Szorozza 10-zel a vektort.
-	 * (n-1)/2-t alkalmazva a koordinatakon egy-egy 10-zel valo osztas utan kesz az index. 
-	 * @param v - Az uj sebesseg vektor.
-	 */
-	public int[] vektorAtvalt(Vektor v) { // TOTO a vektorátbvált jelenleg 20-asokra kerekít, jó ez így?
-		v.skalarOszt(10);
-		if(v.getX()%2==0)
-			v.setX(v.getX()+1);
-		if(v.getY()%2==0)
-			v.setY(v.getY()+1);
-		v.skalarSzoroz(10);
-		
-		int[] tmp = new int[2];
-		tmp[0] = ((v.getX()/10)-1)/2;
-		tmp[1] = ((v.getY()/10)-1)/2;
-		return tmp;
-	}
 	
 	//Elvileg kész
 	public void olajLerak() {
@@ -231,21 +210,6 @@ public class Robot extends Robotok {
 		}
 	}
 
-	/**
-	 * Kis Robot - Nagy Robot utkozese.
-	 * A kisrobot raugrik a nagyra, ekkor vissza kerul az eredeti poziciojara.
-	 * Lepattan a nagyrol.
-	 * @param r - Kis robot, ami ra ugrik a nagyra.
-	 */
-	public void utkozes(KisRobot r) {
-//		Vektor tmp = r.getSebessegvektor();//Aktualis seb. v.
-		Vektor tmp = new Vektor();
-		tmp.skalarSzoroz(-1);//Vissza kell pattania.
-		r.lep(tmp);//Ezzel leptetjuk vissza. Remelhetoleg a kiindulasi mezobe ter vissza.
-//		tmp.skalarSzoroz(-1);//Az eredeti vektort vissza kellene allitani.
-//		r.setSebessegvektor(tmp);
-		
-	}
 
 	public int getOlaj() {
 		return olaj;
