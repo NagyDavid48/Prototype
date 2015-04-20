@@ -290,6 +290,7 @@ public class Palya {
 						while (k<kisrobotok.size()){//Vegig megyunk a kisrobotok tombjen
 							if(m[i][j] == kisrobotok.get(k).getMezo())//Ha az akadaly helyen van kisrobot
 								kisrobotok.get(k).setFoltonvan(false);//Akkor ezt megszüntetjuk
+							k++;
 						}
 					}
 				}//Ha nincs, akkor nem csinalunk semmit.

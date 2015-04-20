@@ -72,6 +72,7 @@ public class Command {
 	
 	private void kiirallas(String[] cmd, PrintWriter w) {
 		System.out.print(pm.getKor()+" "); // hátralevõ körök
+		w.print(pm.getKor()+" ");
 		for (int i = 0; i < pm.palya.robotok.size(); i++){
 			System.out.print(pm.palya.robotok.get(i).getCheckpoint()+" ");				// robotok checkpontjai
 			w.print(pm.palya.robotok.get(i).getCheckpoint()+" ");
